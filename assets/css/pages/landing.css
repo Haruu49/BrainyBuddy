@@ -374,3 +374,6 @@
   }
   .site-nav .site-nav__theme:hover { background: var(--color-surface-2); color: var(--color-text); }
 }
+
+/* Buddy's hello bubble in the hero stays inside the space above Buddy, clear of the explanation text */
+.path-card__buddy .mascot-bubble { max-width: 108px; padding: 8px 10px; font-size: 0.9rem; text-align: left; }

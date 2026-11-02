@@ -941,8 +941,60 @@
 .insight[data-category="Subject Improvement"] { --insight-accent: var(--bb-amber); }
 .insight[data-category="Focus Management"] { --insight-accent: var(--bb-sky); }
 
-/* ---------- Buddy (mascot) — blinks, hops when clicked ---------- */
+/* ---------- Buddy (mascot) — breathes, blinks, looks around, waves, hops when clicked ---------- */
 .mascot { overflow: visible; }
+.mascot__body {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: bb-breathe 3.8s ease-in-out var(--blink-delay, 0s) infinite;
+}
+@keyframes bb-breathe {
+  0%, 100% { transform: none; }
+  50% { transform: scale(1.012, 1.03); }
+}
+.mascot__look { transition: transform 180ms var(--ease-out); }
+
+/* The arm pivots at the shoulder (bottom-left corner of its box) */
+.mascot__arm { transform-box: fill-box; transform-origin: 0% 100%; }
+.mascot:not(.mascot--wave) .mascot__arm,
+.mascot:not(.mascot--wave) .mascot__wave-line { opacity: 0; }
+.mascot--wave .mascot__arm { animation: bb-wave 4.2s ease-in-out var(--blink-delay, 0s) infinite; }
+.mascot--wave .mascot__wave-line { animation: bb-wave-line 4.2s ease-in-out var(--blink-delay, 0s) infinite; }
+.mascot.is-waving .mascot__arm { animation: bb-wave-pop 1.9s ease-in-out both; }
+.mascot.is-waving .mascot__wave-line { animation: bb-wave-line-pop 1.9s ease-in-out both; }
+.mascot--wave.is-waving .mascot__arm { animation: bb-wave-burst 1.6s ease-in-out; }
+.mascot--wave.is-waving .mascot__wave-line { animation: none; }
+@keyframes bb-wave {
+  0%, 46%, 100% { transform: none; }
+  8% { transform: rotate(-20deg); }
+  16% { transform: rotate(14deg); }
+  24% { transform: rotate(-20deg); }
+  32% { transform: rotate(14deg); }
+  40% { transform: rotate(-6deg); }
+}
+@keyframes bb-wave-line {
+  0%, 44%, 100% { opacity: 1; }
+  60%, 90% { opacity: 0.25; }
+}
+@keyframes bb-wave-burst {
+  0%, 100% { transform: none; }
+  12%, 44%, 76% { transform: rotate(-24deg); }
+  28%, 60% { transform: rotate(16deg); }
+}
+/* For moods without a raised arm: pop it up, wave, then tuck it away again */
+@keyframes bb-wave-pop {
+  0% { opacity: 0; transform: rotate(80deg) scale(0.4); }
+  12% { opacity: 1; transform: rotate(-6deg) scale(1); }
+  24%, 48% { transform: rotate(-22deg); }
+  36%, 60% { transform: rotate(16deg); }
+  74% { opacity: 1; transform: rotate(-4deg); }
+  86% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: rotate(80deg) scale(0.4); }
+}
+@keyframes bb-wave-line-pop {
+  0%, 10%, 84%, 100% { opacity: 0; }
+  20%, 70% { opacity: 1; }
+}
 .mascot__eyes {
   transform-box: fill-box;
   transform-origin: center;
@@ -972,6 +1024,158 @@
 .buddy-btn .mascot { transition: transform var(--dur-slow) var(--ease-spring); }
 .buddy-btn:hover .mascot:not(.is-bouncing) { transform: rotate(-5deg) scale(1.04); }
 .buddy-btn:focus-visible { outline: var(--focus-outline); outline-offset: 4px; }
+
+/* Talking Buddy (BB.mascot.interactive): speech bubble that types out a line */
+.mascot-host { position: relative; transition: transform 0.9s cubic-bezier(0.45, 0.05, 0.35, 1); }
+.mascot-host > .buddy-btn,
+.mascot-host > .buddy-btn .mascot { width: 100%; }
+.mascot-bubble {
+  --bubble-ink: var(--bb-plum);
+  position: absolute;
+  z-index: 3;
+  bottom: 92%;
+  left: 50%;
+  display: grid;
+  width: max-content;
+  max-width: min(240px, 78vw);
+  padding: 10px 16px;
+  border: 2.5px solid var(--bubble-ink);
+  border-radius: 18px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-pop);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 10px) scale(0.8);
+  transform-origin: 50% 100%;
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-spring);
+}
+:root[data-theme="dark"] .mascot-bubble { --bubble-ink: var(--bb-pink); }
+.mascot-bubble.is-shown { opacity: 1; transform: translate(-50%, 0) scale(1); }
+/* The sizer and the typed text share one grid cell; the sizer is invisible but sets the final size */
+.mascot-bubble__size,
+.mascot-bubble__text { grid-area: 1 / 1; }
+.mascot-bubble__size { visibility: hidden; }
+.mascot-bubble__text.is-typing::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  background: currentColor;
+  animation: bb-caret 0.7s steps(1) infinite;
+}
+@keyframes bb-caret { 50% { opacity: 0; } }
+/* Tail */
+.mascot-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-right: 2.5px solid var(--bubble-ink);
+  border-bottom: 2.5px solid var(--bubble-ink);
+  background: var(--color-surface);
+  transform: translate(-50%, -6px) rotate(45deg);
+}
+.mascot-bubble[data-place="top-start"] { left: 0; transform: translateY(10px) scale(0.8); transform-origin: 30px 100%; }
+.mascot-bubble[data-place="top-start"].is-shown { transform: none; }
+.mascot-bubble[data-place="top-start"]::after { left: 30px; }
+.mascot-bubble[data-place="left"] {
+  top: 4%;
+  right: 86%;
+  bottom: auto;
+  left: auto;
+  transform: translateX(10px) scale(0.8);
+  transform-origin: 100% 50%;
+}
+.mascot-bubble[data-place="left"].is-shown { transform: none; }
+.mascot-bubble[data-place="left"]::after {
+  top: 50%;
+  left: 100%;
+  border-top: 2.5px solid var(--bubble-ink);
+  border-bottom: 0;
+  transform: translate(-6px, -50%) rotate(45deg);
+}
+
+/* Watching a form (data-mascot-watch): walk over, lean in and read along; look away from passwords */
+.mascot__face { transition: transform 260ms var(--ease-out); }
+.mascot__whistle { opacity: 0; transition: opacity var(--dur-base) ease; }
+.mascot-host > .buddy-btn { transform-origin: 50% 92%; transition: transform 420ms var(--ease-spring); }
+.mascot-host.is-peeking > .buddy-btn,
+.mascot-host.is-shy > .buddy-btn { transform: rotate(var(--lean, 0deg)); }
+.mascot-host.is-peeking .mascot__face,
+.mascot-host.is-shy .mascot__face { transform: translate(var(--face-x, 0px), var(--face-y, 0px)); }
+/* Magnifying glass: pops up from the hand, sways as if searching, zooms each new character */
+.mascot__magnifier,
+.mascot__magnifier-inner { transform-box: fill-box; transform-origin: 70% 86%; }
+.mascot__magnifier {
+  opacity: 0;
+  transform: rotate(-30deg) scale(0.3);
+  transition: opacity var(--dur-base) ease, transform 460ms var(--ease-spring);
+}
+.mascot-host.is-magnifying .mascot__magnifier { opacity: 1; transform: none; }
+.mascot-host.is-magnifying .mascot__magnifier-inner { animation: bb-search 2.6s ease-in-out infinite; }
+@keyframes bb-search {
+  0%, 100% { transform: none; }
+  30% { transform: rotate(-5deg) translateY(-2px); }
+  65% { transform: rotate(4deg); }
+}
+.mascot__lens-char { font-family: var(--font-display); font-weight: 600; transform-box: fill-box; transform-origin: center; }
+.mascot__lens-char.is-pop { animation: bb-lens-pop 260ms var(--ease-spring); }
+@keyframes bb-lens-pop {
+  from { transform: scale(1.5); }
+  to { transform: none; }
+}
+/* Busy reading: the waving hand rests */
+.mascot-host.is-peeking .mascot--wave .mascot__arm { animation: none; }
+.mascot-host.is-shy .mascot__mouth { opacity: 0; }
+.mascot-host.is-shy .mascot__whistle { opacity: 1; }
+/* Walking: feet take turns stepping and the body bobs */
+.mascot__foot { transform-box: fill-box; }
+.mascot-host.is-walking .mascot__foot { animation: bb-step 0.4s ease-in-out infinite; }
+.mascot-host.is-walking .mascot__foot--r { animation-delay: -0.2s; }
+.mascot-host.is-walking .mascot__body { animation: bb-walk-bob 0.2s ease-in-out infinite alternate; }
+@keyframes bb-step {
+  0%, 100% { transform: none; }
+  50% { transform: translateY(-9px); }
+}
+@keyframes bb-walk-bob {
+  from { transform: none; }
+  to { transform: translateY(-4px); }
+}
+/* Whistled notes while looking away */
+.mascot-notes {
+  position: absolute;
+  top: 36%;
+  left: 68%;
+  z-index: 2;
+  pointer-events: none;
+  color: var(--bb-plum);
+  font-size: clamp(1rem, 0.6rem + 1.4vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1;
+}
+:root[data-theme="dark"] .mascot-notes { color: var(--bb-pink); }
+.mascot-notes i { position: absolute; font-style: normal; opacity: 0; }
+.mascot-host.is-shy .mascot-notes i { animation: bb-note 2.4s ease-out infinite; }
+.mascot-host.is-shy .mascot-notes i:nth-child(2) { animation-delay: 0.8s; }
+.mascot-host.is-shy .mascot-notes i:nth-child(3) { animation-delay: 1.6s; }
+@keyframes bb-note {
+  0% { opacity: 0; transform: translate(0, 0) rotate(-10deg) scale(0.7); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translate(26px, -64px) rotate(14deg) scale(1.1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot-host.is-shy .mascot-notes i:first-child { opacity: 1; animation: none; }
+}
 
 /* ---------- Count-up numbers keep their width steady ---------- */
 [data-countup] { font-variant-numeric: tabular-nums; }

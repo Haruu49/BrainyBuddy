@@ -129,10 +129,13 @@
         void text.offsetWidth;
         text.classList.add("is-new");
         BB.mascot.bounce(U.$(".mascot", btn));
+        BB.mascot.wave(U.$(".mascot", btn));
       }
     }
     function nextNudge() { i = (i + 1) % nudges.length; show(true); }
     show(false);
+    // Buddy waves hello when the dashboard opens
+    setTimeout(function () { BB.mascot.wave(U.$(".mascot", btn)); }, 800);
     btn.addEventListener("click", nextNudge);
     U.$("#buddy-next").addEventListener("click", nextNudge);
   }

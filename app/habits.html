@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Study Habits | Brainy Buddy</title>
+  <meta name="description" content="Track study sessions, breaks and focus, and see when you study best once there is enough data.">
+  <meta name="theme-color" content="#ffa781">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <script src="../assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/viz.css">
+  <link rel="stylesheet" href="../assets/css/pages/app.css">
+  <link rel="stylesheet" href="../assets/css/pages/habits.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app__main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page" id="main" tabindex="-1">
+        <div class="page-header">
+          <div>
+            <div class="title-row"><h2>Study habits</h2><span id="demo-flag"></span></div>
+            <p>Time your study sessions, log breaks and rate your focus. Brainy Buddy looks for patterns, and says so plainly when there isn't enough data yet.</p>
+          </div>
+        </div>
+
+        <section class="panel tracker" id="tracker" aria-labelledby="tracker-title"></section>
+
+        <section class="section" aria-labelledby="sa-title">
+          <div class="section__header"><div><h2 class="section__title" id="sa-title">Study analytics</h2><p class="section__desc">All recorded sessions. Durations exclude paused time.</p></div></div>
+          <div class="grid grid--3" id="study-metrics"></div>
+        </section>
+
+        <div class="grid grid--main-side section">
+          <section class="panel" aria-labelledby="hm-title">
+            <div class="panel__header">
+              <div><h2 class="panel__title" id="hm-title">Weekly study activity</h2><p class="panel__subtitle">Minutes studied each day, last 6 weeks</p></div>
+              <span class="heatmap-scale" aria-hidden="true">Less <span class="heatmap__cell"></span><span class="heatmap__cell" data-level="1"></span><span class="heatmap__cell" data-level="2"></span><span class="heatmap__cell" data-level="3"></span><span class="heatmap__cell" data-level="4"></span> More</span>
+            </div>
+            <div class="heatmap-wrap"><div id="heatmap"></div></div>
+          </section>
+          <section class="panel" aria-labelledby="sub-title">
+            <div class="panel__header"><div><h2 class="panel__title" id="sub-title">Subject study distribution</h2><p class="panel__subtitle">Share of study time, with sessions per subject</p></div></div>
+            <div class="chart-box chart-box--sm"><canvas id="chart-subjects" role="img" aria-label="Share of study time by subject"></canvas></div>
+            <ul class="stat-list" id="subject-sessions" style="margin-top:12px"></ul>
+          </section>
+        </div>
+
+        <div class="grid grid--2 section">
+          <section class="panel" aria-labelledby="dur-title">
+            <div class="panel__header"><div><h2 class="panel__title" id="dur-title">Study duration</h2><p class="panel__subtitle">Minutes studied per day, last 14 days</p></div></div>
+            <div class="chart-box"><canvas id="chart-duration" role="img" aria-label="Minutes studied per day over the last 14 days"></canvas></div>
+          </section>
+          <section class="panel" aria-labelledby="focus-title">
+            <div class="panel__header"><div><h2 class="panel__title" id="focus-title">Focus ratings</h2><p class="panel__subtitle">How you rated your focus at the end of each session</p></div></div>
+            <div class="chart-box"><canvas id="chart-focus" role="img" aria-label="Number of sessions at each focus rating from 1 to 5"></canvas></div>
+          </section>
+        </div>
+
+        <section class="section panel" aria-labelledby="bt-title">
+          <div class="panel__header">
+            <div><h2 class="panel__title" id="bt-title">Best study time analysis</h2><p class="panel__subtitle">Practice results after sessions in each part of the day, compared fairly</p></div>
+          </div>
+          <div id="verdict"></div>
+          <div class="grid grid--main-side" style="margin-top:24px">
+            <div>
+              <div class="chart-box"><canvas id="chart-periods" role="img" aria-label="Adjusted practice results and focus by time of day"></canvas></div>
+            </div>
+            <div>
+              <h3 class="label" style="margin-bottom:8px">Does a longer session mean a better result?</h3>
+              <div class="chart-box chart-box--sm"><canvas id="chart-scatter" role="img" aria-label="Session length compared with practice result"></canvas></div>
+              <p class="text-sm text-secondary" id="scatter-note" style="margin-top:8px"></p>
+            </div>
+          </div>
+          <div class="table-wrap" style="margin-top:24px" id="period-table"></div>
+          <details class="definition">
+            <summary>How this comparison works</summary>
+            <ul id="method-list"></ul>
+          </details>
+        </section>
+
+        <section class="section panel panel--flush" aria-labelledby="recent-title">
+          <div class="panel__header" style="padding:24px 24px 0"><div><h2 class="panel__title" id="recent-title">Recent sessions</h2><p class="panel__subtitle">Your latest 12 sessions</p></div></div>
+          <div id="recent-sessions" style="margin-top:16px"></div>
+        </section>
+
+        <dialog class="dialog" id="end-dialog" aria-labelledby="end-title">
+          <form id="end-form" novalidate>
+            <div class="dialog__header">
+              <h2 class="dialog__title" id="end-title">End this study session</h2>
+              <button type="button" class="btn btn--ghost btn--icon btn--sm" data-dialog-close aria-label="Close dialog" data-icon="x"></button>
+            </div>
+            <div class="dialog__body" style="color:var(--color-text)">
+              <p class="text-secondary" id="end-summary"></p>
+              <fieldset class="field" style="border:0;padding:0;margin:20px 0 0">
+                <legend class="label" style="margin-bottom:8px">How focused were you?</legend>
+                <div class="focus-rating" id="focus-rating"></div>
+                <div class="focus-scale" aria-hidden="true"><span>1 Very distracted</span><span>5 Fully focused</span></div>
+                <p class="field-error" id="focus-error"></p>
+              </fieldset>
+              <div class="field" style="margin-top:20px">
+                <label class="label" for="end-breaks">Breaks taken</label>
+                <input class="input" type="number" id="end-breaks" name="breaks" min="0" max="50" step="1" inputmode="numeric" style="max-width:140px">
+                <p class="hint">Pausing the timer counts as a break. Adjust if needed.</p>
+                <p class="field-error" id="end-breaks-error"></p>
+              </div>
+              <details class="definition" style="margin-top:20px">
+                <summary>Add a practice result (optional)</summary>
+                <p class="text-sm text-secondary" style="margin-top:8px">If you tested yourself after studying, add the result. It's used to compare which times of day work best for you.</p>
+                <div class="field-row" style="margin-top:12px">
+                  <div class="field"><label class="label" for="end-accuracy">Score (%)</label><input class="input" type="number" id="end-accuracy" name="accuracy" min="0" max="100" step="1" inputmode="numeric"><p class="field-error" id="end-accuracy-error"></p></div>
+                  <div class="field"><label class="label" for="end-difficulty">Question difficulty</label><select class="select" id="end-difficulty" name="difficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></div>
+                </div>
+              </details>
+            </div>
+            <div class="dialog__footer">
+              <button type="button" class="btn btn--danger-outline" id="discard-session">Discard session</button>
+              <button type="button" class="btn" data-dialog-close>Keep studying</button>
+              <button type="submit" class="btn btn--primary">Save session</button>
+            </div>
+          </form>
+        </dialog>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/utils.js"></script>
+  <script src="../assets/js/core/storage.js"></script>
+  <script src="../assets/js/core/icons.js"></script>
+  <script src="../assets/js/core/mascot.js"></script>
+  <script src="../assets/js/core/theme.js"></script>
+  <script src="../assets/js/core/feedback.js"></script>
+  <script src="../assets/js/core/forms.js"></script>
+  <script src="../assets/js/core/auth.js"></script>
+  <script src="../assets/js/data/demo-data.js"></script>
+  <script src="../assets/js/data/question-bank.js"></script>
+  <script src="../assets/js/data/repo.js"></script>
+  <script src="../assets/js/core/ui.js"></script>
+  <script src="../assets/js/core/shell.js"></script>
+  <script src="../assets/vendor/chart.umd.min.js"></script>
+  <script src="../assets/js/core/charts.js"></script>
+  <script src="../assets/js/lib/study-analytics.js"></script>
+  <script src="../assets/js/pages/habits.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Recommendations | Brainy Buddy</title>
+  <meta name="description" content="Recommendations based on your examination and study records, each with evidence, confidence and a measurable target.">
+  <meta name="theme-color" content="#ffa781">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <script src="../assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/viz.css">
+  <link rel="stylesheet" href="../assets/css/pages/app.css">
+  <link rel="stylesheet" href="../assets/css/pages/upload.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app__main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page" id="main" tabindex="-1">
+        <div class="page-header">
+          <div>
+            <div class="title-row"><h2>AI recommendations</h2><span id="demo-flag"></span></div>
+            <p>Suggestions drawn from your own exam and study records. Each one shows the pattern it found, the evidence, how confident it is and a target you can track.</p>
+          </div>
+        </div>
+
+        <div class="alert alert--info" role="note" style="margin-bottom:24px">
+          <span data-icon="info"></span>
+          <div><p class="alert__title">Rule-based recommendations (demo)</p><p>No AI model is connected yet. Each recommendation comes from a transparent rule, and you can open "How this was generated" to read it. A model can replace these rules later without changing what you see here.</p></div>
+        </div>
+
+        <section aria-labelledby="rec-summary-title">
+          <h2 class="visually-hidden" id="rec-summary-title">Summary</h2>
+          <div class="grid grid--4" id="rec-metrics"></div>
+        </section>
+
+        <section class="section" aria-labelledby="rec-list-title">
+          <div class="section__header">
+            <h2 class="section__title" id="rec-list-title">Your recommendations</h2>
+            <div class="cluster">
+              <label class="label" for="status-filter" style="font-weight:500">Status</label>
+              <select class="select select--sm" id="status-filter" style="width:auto">
+                <option value="all">All statuses</option>
+                <option value="open">Not completed</option>
+                <option value="not_started">Not started</option>
+                <option value="in_progress">In progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+          </div>
+          <div class="chip-group" id="category-chips" role="group" aria-label="Filter by category" style="margin-bottom:20px"></div>
+          <div class="stack" id="rec-list" style="--stack-gap:16px" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/utils.js"></script>
+  <script src="../assets/js/core/storage.js"></script>
+  <script src="../assets/js/core/icons.js"></script>
+  <script src="../assets/js/core/mascot.js"></script>
+  <script src="../assets/js/core/theme.js"></script>
+  <script src="../assets/js/core/feedback.js"></script>
+  <script src="../assets/js/core/forms.js"></script>
+  <script src="../assets/js/core/auth.js"></script>
+  <script src="../assets/js/data/demo-data.js"></script>
+  <script src="../assets/js/data/question-bank.js"></script>
+  <script src="../assets/js/data/repo.js"></script>
+  <script src="../assets/js/core/ui.js"></script>
+  <script src="../assets/js/core/shell.js"></script>
+  <script src="../assets/js/lib/exam-analytics.js"></script>
+  <script src="../assets/js/lib/study-analytics.js"></script>
+  <script src="../assets/js/lib/academic.js"></script>
+  <script src="../assets/js/lib/recommendation-engine.js"></script>
+  <script src="../assets/js/pages/recommendations.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Upload records (CSV import) and recommendations
+   ========================================================================== */
+
+.dropzone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-10) var(--space-6);
+  border: 2px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-2);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--dur-fast) ease, background-color var(--dur-fast) ease;
+}
+.dropzone:hover,
+.dropzone.is-dragover { border-color: var(--color-primary); background: var(--color-primary-soft); }
+.dropzone:focus-within { box-shadow: var(--focus-ring); border-color: var(--color-primary); }
+.dropzone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.dropzone__icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-primary);
+}
+.dropzone__icon .icon { width: 28px; height: 28px; }
+.dropzone__title { font-weight: 650; }
+.dropzone__hint { font-size: var(--text-sm); color: var(--color-text-secondary); }
+
+.import-step { margin-top: var(--space-6); }
+.import-step h3 { font-size: var(--text-lg); }
+.import-step > p { margin-top: var(--space-1); color: var(--color-text-secondary); font-size: var(--text-sm); }
+.import-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); margin-top: var(--space-6); padding-top: var(--space-5); border-top: 1px solid var(--color-border); }
+.import-actions .btn--primary { margin-left: auto; }
+
+.file-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.file-chip .icon { color: var(--color-primary); }
+.file-chip__name { font-weight: 600; }
+.file-chip__size { font-size: var(--text-xs); color: var(--color-text-secondary); }
+
+.mapping { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+.validation-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-4); }
+@media (max-width: 640px) { .validation-summary { grid-template-columns: 1fr; } }
+
+.edit-table td { vertical-align: top; min-width: 120px; }
+.edit-table td:has(select) { min-width: 180px; }
+.edit-table td.row-num { min-width: 56px; font-weight: 700; color: var(--color-text-secondary); }
+.edit-table .input, .edit-table .select { min-height: 34px; font-size: var(--text-sm); padding-inline: var(--space-2); }
+.edit-table .select { padding-right: 2rem; }
+.edit-table .cell-error { margin-top: 4px; font-size: 11px; font-weight: 500; color: var(--color-danger); line-height: 1.35; }
+.edit-table tr.is-excluded td:not(:last-child) { opacity: 0.45; }
+.edit-table tr.has-error td.row-num { color: var(--color-danger); }
+.not-recorded { color: var(--color-text-muted); font-style: italic; }
+
+.field-guide td:first-child { font-weight: 600; white-space: nowrap; }
+
+/* Recommendations */
+.rec-progress {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+}
+.rec-progress__nums { display: flex; justify-content: space-between; gap: var(--space-3); font-size: var(--text-xs); color: var(--color-text-secondary); }
+.rec-progress__nums strong { display: block; font-size: var(--text-base); color: var(--color-text); font-variant-numeric: tabular-nums; }
+.rec-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.rec-controls .select { width: auto; min-width: 170px; }
+.rec-card[data-status="completed"] { opacity: 0.85; }
+.rec-card[data-status="completed"] .insight__title { text-decoration: line-through; text-decoration-color: var(--color-text-muted); }
+.rule-note { font-size: var(--text-xs); color: var(--color-text-secondary); }
+.rule-note summary { cursor: pointer; font-weight: 600; }
+.rule-note p { margin-top: 6px; }

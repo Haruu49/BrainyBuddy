@@ -1,0 +1,22 @@
+/* Design system reference page */
+.sg-section + .sg-section { margin-top: var(--space-8); }
+.sg-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.sg-row + .sg-row { margin-top: var(--space-4); }
+.sg-label { font-size: var(--text-xs); color: var(--color-text-secondary); margin-bottom: var(--space-2); font-weight: 600; }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-4); }
+.swatch { border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.swatch__chip { height: 72px; }
+.swatch__info { padding: var(--space-3); font-size: var(--text-xs); }
+.swatch__info strong { display: block; font-size: var(--text-sm); }
+.swatch__info code { color: var(--color-text-secondary); font-family: inherit; font-variant-numeric: tabular-nums; }
+.type-scale > div { display: grid; grid-template-columns: 110px 1fr; gap: var(--space-4); align-items: baseline; padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
+.type-scale > div:last-child { border-bottom: 0; }
+.type-scale span:first-child { font-size: var(--text-xs); color: var(--color-text-secondary); }
+.mascot-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-4); }
+.mascot-row figure { margin: 0; text-align: center; font-size: var(--text-sm); color: var(--color-text-secondary); }
+.mascot-row svg { width: 120px; margin: 0 auto var(--space-2); }
+.icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: var(--space-2); }
+.icon-grid div { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: var(--space-3) var(--space-1); border-radius: var(--radius-sm); font-size: 11px; color: var(--color-text-secondary); text-align: center; word-break: break-all; }
+.icon-grid div:hover { background: var(--color-surface-2); color: var(--color-text); }
+.icon-grid .icon { width: 22px; height: 22px; color: var(--color-text); }
+.bp-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); }

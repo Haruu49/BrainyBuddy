@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | Brainy Buddy</title>
+  <meta name="description" content="Your Brainy Buddy dashboard: performance, exam behaviour, study habits and recommendations.">
+  <meta name="theme-color" content="#ffa781">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <script src="../assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/viz.css">
+  <link rel="stylesheet" href="../assets/css/pages/app.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app__main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page" id="main" tabindex="-1">
+        <section class="hello" aria-labelledby="welcome-title">
+          <div class="hello__main">
+            <h2 class="hello__title" id="welcome-title">Welcome back</h2>
+            <p class="hello__text" id="welcome-text">Here's how your learning looks right now.</p>
+            <div class="welcome__meta" id="welcome-meta"></div>
+            <div class="hello__buddy">
+              <button type="button" class="buddy-btn hello__buddy-btn" id="buddy-btn" tabindex="-1" aria-hidden="true"></button>
+              <div class="hello__speech">
+                <p class="hello__speech-text" id="buddy-says" aria-live="polite"></p>
+                <button type="button" class="link-btn text-xs hello__speech-next" id="buddy-next">Another nudge</button>
+              </div>
+            </div>
+          </div>
+          <div class="hello__today" id="today-card"></div>
+        </section>
+
+        <section class="section" aria-labelledby="quick-title">
+          <div class="section__header">
+            <div>
+              <h2 class="section__title" id="quick-title">What would you like to do?</h2>
+              <p class="section__desc">Jump straight in. You can also press Ctrl K from any page.</p>
+            </div>
+          </div>
+          <nav class="quick-grid" id="quick-actions" aria-labelledby="quick-title"></nav>
+        </section>
+
+        <section class="section" aria-labelledby="overview-title">
+          <h2 class="visually-hidden" id="overview-title">Overview</h2>
+          <div class="grid grid--4" id="metrics"></div>
+        </section>
+
+        <section class="section" aria-labelledby="perf-title">
+          <div class="section__header">
+            <div>
+              <h2 class="section__title" id="perf-title">Academic performance</h2>
+              <p class="section__desc">Scores from practice exams and imported records, and your study time this week.</p>
+            </div>
+          </div>
+          <div class="grid grid--3">
+            <article class="panel" aria-labelledby="subject-chart-title">
+              <div class="panel__header"><div><h3 class="panel__title" id="subject-chart-title">Subject performance</h3><p class="panel__subtitle">Average score by subject</p></div></div>
+              <div class="chart-box"><canvas id="subject-chart" role="img" aria-label="Average score by subject"></canvas></div>
+            </article>
+            <article class="panel" aria-labelledby="score-chart-title">
+              <div class="panel__header"><div><h3 class="panel__title" id="score-chart-title">Score progression</h3><p class="panel__subtitle">Each exam in date order</p></div></div>
+              <div class="chart-box"><canvas id="score-chart" role="img" aria-label="Exam scores over time"></canvas></div>
+            </article>
+            <article class="panel" aria-labelledby="weekly-chart-title">
+              <div class="panel__header"><div><h3 class="panel__title" id="weekly-chart-title">Weekly study activity</h3><p class="panel__subtitle">Hours studied, last 7 days</p></div></div>
+              <div class="chart-box"><canvas id="weekly-chart" role="img" aria-label="Hours studied each day over the last 7 days"></canvas></div>
+            </article>
+          </div>
+        </section>
+
+        <div class="grid grid--2 section">
+          <section class="panel" aria-labelledby="behaviour-title">
+            <div class="panel__header">
+              <div><h2 class="panel__title" id="behaviour-title">Learning behaviour insights</h2><p class="panel__subtitle">How you work through exams</p></div>
+            </div>
+            <ul class="stat-list" id="behaviour-list"></ul>
+            <div class="panel__footer"><a href="analytics.html" class="fw-600 text-sm">See your exam patterns</a></div>
+          </section>
+          <section class="panel" aria-labelledby="habits-title">
+            <div class="panel__header">
+              <div><h2 class="panel__title" id="habits-title">Study habits</h2><p class="panel__subtitle">Based on your recorded study sessions</p></div>
+            </div>
+            <ul class="stat-list" id="habits-list"></ul>
+            <div class="panel__footer"><a href="habits.html" class="fw-600 text-sm">See your study habits</a></div>
+          </section>
+        </div>
+
+        <section class="section" aria-labelledby="recs-title">
+          <div class="section__header">
+            <div>
+              <div class="title-row"><h2 class="section__title" id="recs-title">AI recommendations</h2><span class="badge badge--outline">Rule-based demo</span></div>
+              <p class="section__desc">Generated by transparent rules from your own records. No AI model is connected yet.</p>
+            </div>
+            <a class="btn btn--sm" href="recommendations.html">View all recommendations</a>
+          </div>
+          <div class="rec-grid" id="rec-list"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/utils.js"></script>
+  <script src="../assets/js/core/storage.js"></script>
+  <script src="../assets/js/core/icons.js"></script>
+  <script src="../assets/js/core/mascot.js"></script>
+  <script src="../assets/js/core/theme.js"></script>
+  <script src="../assets/js/core/feedback.js"></script>
+  <script src="../assets/js/core/forms.js"></script>
+  <script src="../assets/js/core/auth.js"></script>
+  <script src="../assets/js/data/demo-data.js"></script>
+  <script src="../assets/js/data/question-bank.js"></script>
+  <script src="../assets/js/data/repo.js"></script>
+  <script src="../assets/js/core/ui.js"></script>
+  <script src="../assets/js/core/shell.js"></script>
+  <script src="../assets/vendor/chart.umd.min.js"></script>
+  <script src="../assets/js/core/charts.js"></script>
+  <script src="../assets/js/lib/exam-analytics.js"></script>
+  <script src="../assets/js/lib/study-analytics.js"></script>
+  <script src="../assets/js/lib/academic.js"></script>
+  <script src="../assets/js/lib/recommendation-engine.js"></script>
+  <script src="../assets/js/pages/dashboard.js"></script>
+</body>
+</html>

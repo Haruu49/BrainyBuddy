@@ -1,0 +1,276 @@
+/* ==========================================================================
+   Brainy Buddy — Design tokens
+   All colours, type, spacing, radii, shadows and motion live here.
+   Light theme is the default; dark theme overrides semantic tokens only.
+
+   Palette: soft peach (brand), brain pink (Buddy), warm plum ink (text)
+   and teal (written questions, success). Contrast-checked to WCAG AA.
+   ========================================================================== */
+
+:root {
+  /* Peach — the brand colour */
+  --bb-peach-50: #fff6f2;
+  --bb-peach-100: #ffede4;
+  --bb-peach-150: #ffe6da;
+  --bb-peach-200: #ffd5c2;
+  --bb-peach-300: #ffbe9f;
+  --bb-peach: #ffa781;
+  --bb-peach-500: #ff9466;
+  --bb-peach-600: #e2652f;   /* form controls, chart lines (≥3:1 on white) */
+  --bb-peach-700: #b0461c;   /* links and peach text (≥4.5:1) */
+  --bb-peach-800: #8f3612;
+  --bb-peach-ink: #4a1d0b;   /* text placed on peach fills */
+
+  /* Brain pink — Buddy and secondary accents */
+  --bb-pink-100: #ffe3ea;
+  --bb-pink-200: #fcc8d5;
+  --bb-pink: #f59ab0;
+  --bb-pink-500: #ec7f9c;
+  --bb-pink-600: #d9668a;
+  --bb-pink-700: #a8335a;
+  --bb-pink-ink: #4a1424;
+
+  /* Plum — warm ink for text and dark surfaces */
+  --bb-plum: #3b2730;
+  --bb-plum-700: #5e3f46;
+
+  /* Teal — written questions, success */
+  --bb-teal: #14b8a6;
+  --bb-teal-700: #0f766e;
+  --bb-teal-50: #f0fdfa;
+  --bb-teal-100: #ccfbf1;
+
+  --bb-white: #ffffff;
+
+  /* Supporting hues (charts, states) */
+  --bb-lavender: #9b87e0;
+  --bb-amber: #f5a524;
+  --bb-amber-700: #a45a00;
+  --bb-honey: #fcd27a;
+  --bb-rose: #ef4f6f;
+  --bb-red-600: #c62828;
+  --bb-red-700: #a61f1f;
+  --bb-sky: #4fa3d9;
+  --bb-green-600: #2f9e5b;
+
+  /* Legacy aliases — older selectors keep working, now in the peach family */
+  --bb-navy: var(--bb-plum);
+  --bb-indigo: var(--bb-peach);
+  --bb-indigo-600: var(--bb-peach-600);
+  --bb-indigo-700: var(--bb-peach-700);
+  --bb-violet: var(--bb-pink-500);
+  --bb-slate-400: #c9a99c;
+
+  /* Semantic colours — light */
+  --color-bg: var(--bb-peach-50);
+  --color-surface: var(--bb-white);
+  --color-surface-2: var(--bb-peach-100);
+  --color-surface-sunken: #fff0e9;
+  --color-border: #f5ddd2;
+  --color-border-strong: #e9c3b3;
+  --color-text: var(--bb-plum);
+  --color-text-secondary: #7a5a62;
+  --color-text-muted: #806169;
+  --color-text-inverse: var(--bb-white);
+
+  --color-primary: var(--bb-peach);
+  --color-primary-strong: var(--bb-peach-700);
+  --color-primary-stronger: var(--bb-peach-800);
+  --color-primary-soft: var(--bb-peach-150);
+  --color-primary-soft-2: var(--bb-peach-200);
+  --color-on-primary: var(--bb-peach-ink);
+  --color-control: var(--bb-peach-600);
+  --color-link: var(--bb-peach-700);
+
+  --color-pink: var(--bb-pink);
+  --color-pink-strong: var(--bb-pink-700);
+  --color-pink-soft: var(--bb-pink-100);
+
+  --color-accent: var(--bb-teal);
+  --color-accent-strong: var(--bb-teal-700);
+  --color-accent-soft: var(--bb-teal-50);
+  --color-accent-soft-2: var(--bb-teal-100);
+
+  --color-success: var(--bb-teal-700);
+  --color-success-soft: var(--bb-teal-50);
+  --color-warning: var(--bb-amber-700);
+  --color-warning-soft: #fff4de;
+  --color-danger: var(--bb-red-600);
+  --color-danger-strong: var(--bb-red-700);
+  --color-danger-soft: #fdeeee;
+  --color-info: var(--bb-peach-700);
+  --color-info-soft: var(--bb-peach-150);
+
+  /* Question-type encoding — used everywhere */
+  --color-objective: var(--bb-peach-600);
+  --color-subjective: var(--bb-teal);
+
+  /* Sidebar — soft peach in light, warm dark in dark */
+  --sidebar-bg: #ffeadf;
+  --sidebar-text: #5e3f3a;
+  --sidebar-text-strong: var(--bb-plum);
+  --sidebar-muted: #8a5f57;
+  --sidebar-accent: var(--bb-peach-700);
+  --sidebar-hover: rgba(255, 255, 255, 0.6);
+  --sidebar-active-bg: #ffffff;
+  --sidebar-active-shadow: 0 1px 2px rgba(143, 54, 18, 0.08), 0 4px 12px -4px rgba(143, 54, 18, 0.16);
+  --sidebar-border: rgba(176, 70, 28, 0.12);
+  --sidebar-card: rgba(255, 255, 255, 0.65);
+  --sidebar-badge-bg: var(--bb-teal-100);
+  --sidebar-badge-fg: var(--bb-teal-700);
+
+  --focus-ring: 0 0 0 3px rgba(226, 101, 47, 0.38);
+  --focus-outline: 2px solid var(--bb-peach-700);
+
+  /* Typography — Fredoka (rounded, friendly) for headings; Inter for reading and numbers */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Fredoka", ui-rounded, "Nunito", "Varela Round", var(--font-sans);
+  --text-xs: 0.75rem;     /* 12 */
+  --text-sm: 0.875rem;    /* 14 */
+  --text-base: 1rem;      /* 16 */
+  --text-md: 1.125rem;    /* 18 */
+  --text-lg: 1.25rem;     /* 20 */
+  --text-xl: 1.5625rem;   /* 25 */
+  --text-2xl: 1.953rem;   /* 31 */
+  --text-3xl: 2.441rem;   /* 39 */
+  --text-4xl: 3.052rem;   /* 49 */
+  --text-display: clamp(2.4rem, 1.4rem + 3.6vw, 4.1rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.7;
+
+  --tracking-tight: -0.02em;
+  --tracking-tighter: -0.035em;
+  --tracking-display: -0.005em;
+
+  /* Spacing (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Radii — hierarchy, not one value everywhere */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Elevation — warm-tinted, reserved for floating and pressable layers */
+  --shadow-xs: 0 1px 2px rgba(91, 45, 30, 0.06);
+  --shadow-sm: 0 1px 3px rgba(91, 45, 30, 0.08), 0 1px 2px rgba(91, 45, 30, 0.04);
+  --shadow-lift: 0 10px 24px -10px rgba(143, 54, 18, 0.28), 0 2px 6px -2px rgba(143, 54, 18, 0.12);
+  --shadow-pop: 0 12px 32px -8px rgba(91, 45, 30, 0.24), 0 4px 10px -4px rgba(91, 45, 30, 0.12);
+  --shadow-dialog: 0 24px 64px -16px rgba(91, 45, 30, 0.38);
+
+  /* Layout */
+  --sidebar-width: 264px;
+  --sidebar-rail: 76px;
+  --topbar-height: 68px;
+  --bottom-nav-height: 64px;
+  --content-max: 1320px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 360ms;
+
+  --z-sidebar: 40;
+  --z-topbar: 30;
+  --z-bottom-nav: 35;
+  --z-overlay: 50;
+  --z-menu: 60;
+  --z-toast: 80;
+
+  color-scheme: light;
+}
+
+/* Dark theme — semantic overrides only */
+:root[data-theme="dark"] {
+  --color-bg: #1c1412;
+  --color-surface: #261b18;
+  --color-surface-2: #30231f;
+  --color-surface-sunken: #201714;
+  --color-border: #3e2d28;
+  --color-border-strong: #54403a;
+  --color-text: #f7e9e4;
+  --color-text-secondary: #cdb3aa;
+  --color-text-muted: #b39a92;
+
+  --color-primary: #ffa781;
+  --color-primary-strong: #ff9466;
+  --color-primary-stronger: #ec7444;
+  --color-primary-soft: rgba(255, 167, 129, 0.14);
+  --color-primary-soft-2: rgba(255, 167, 129, 0.24);
+  --color-on-primary: #3a1607;
+  --color-control: #ff9466;
+  --color-link: #ffb38f;
+
+  --color-pink: #f7a8bb;
+  --color-pink-strong: #fbb9c9;
+  --color-pink-soft: rgba(245, 154, 176, 0.16);
+
+  --color-accent: #2dd4bf;
+  --color-accent-strong: #5eead4;
+  --color-accent-soft: rgba(20, 184, 166, 0.14);
+  --color-accent-soft-2: rgba(20, 184, 166, 0.24);
+
+  --color-success: #5eead4;
+  --color-success-soft: rgba(20, 184, 166, 0.14);
+  --color-warning: #fbbf24;
+  --color-warning-soft: rgba(245, 165, 36, 0.14);
+  --color-danger: #f87171;
+  --color-danger-strong: #fca5a5;
+  --color-danger-soft: rgba(239, 68, 68, 0.14);
+  --color-info: #ffb38f;
+  --color-info-soft: rgba(255, 167, 129, 0.14);
+
+  --color-objective: #ff9a6e;
+  --color-subjective: #2dd4bf;
+
+  --sidebar-bg: #17100e;
+  --sidebar-text: #d9c2b9;
+  --sidebar-text-strong: #ffffff;
+  --sidebar-muted: #a88c83;
+  --sidebar-accent: #ffb38f;
+  --sidebar-hover: rgba(255, 255, 255, 0.06);
+  --sidebar-active-bg: rgba(255, 167, 129, 0.16);
+  --sidebar-active-shadow: none;
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-card: rgba(255, 255, 255, 0.04);
+  --sidebar-badge-bg: rgba(20, 184, 166, 0.2);
+  --sidebar-badge-fg: #5eead4;
+
+  --focus-ring: 0 0 0 3px rgba(255, 167, 129, 0.5);
+  --focus-outline: 2px solid #ffb38f;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-lift: 0 12px 28px -10px rgba(0, 0, 0, 0.65);
+  --shadow-pop: 0 14px 36px -8px rgba(0, 0, 0, 0.6), 0 4px 10px -4px rgba(0, 0, 0, 0.4);
+  --shadow-dialog: 0 24px 64px -12px rgba(0, 0, 0, 0.7);
+
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+  }
+}

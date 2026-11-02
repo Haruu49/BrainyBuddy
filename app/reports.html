@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Reports | Brainy Buddy</title>
+  <meta name="description" content="Preview and print an academic progress report covering performance, exam behaviour, study habits and improvement trends.">
+  <meta name="theme-color" content="#ffa781">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <script src="../assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/viz.css">
+  <link rel="stylesheet" href="../assets/css/pages/app.css">
+  <link rel="stylesheet" href="../assets/css/pages/reports.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app__main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page" id="main" tabindex="-1">
+        <div class="report-toolbar" role="toolbar" aria-label="Report preview">
+          <button type="button" class="btn btn--sm" id="exit-preview" style="--btn-bg:transparent;--btn-fg:#fff;--btn-border:rgba(255,255,255,.3);--btn-bg-hover:rgba(255,255,255,.08)" data-icon="arrow-left">Back to reports</button>
+          <span class="text-sm" style="color:#cbd5e1">Print preview</span>
+          <button type="button" class="btn btn--primary btn--sm" data-print data-icon="printer">Print or save as PDF</button>
+        </div>
+
+        <div class="page-header">
+          <div>
+            <h2>Academic progress report</h2>
+            <p>A summary of your exam performance, exam behaviour and study habits to keep or share with a parent or teacher.</p>
+          </div>
+        </div>
+
+        <div class="report-controls">
+          <div class="field">
+            <label class="label" for="period">Report period</label>
+            <select class="select" id="period">
+              <option value="30">Last 30 days</option>
+              <option value="90" selected>Last 90 days</option>
+              <option value="all">All time</option>
+            </select>
+          </div>
+          <div class="cluster">
+            <button type="button" class="btn" id="preview-btn" data-icon="eye">Preview report</button>
+            <button type="button" class="btn btn--primary" data-print data-icon="printer">Print or save as PDF</button>
+          </div>
+        </div>
+
+        <article class="report" id="report" aria-labelledby="report-title"></article>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/utils.js"></script>
+  <script src="../assets/js/core/storage.js"></script>
+  <script src="../assets/js/core/icons.js"></script>
+  <script src="../assets/js/core/mascot.js"></script>
+  <script src="../assets/js/core/theme.js"></script>
+  <script src="../assets/js/core/feedback.js"></script>
+  <script src="../assets/js/core/forms.js"></script>
+  <script src="../assets/js/core/auth.js"></script>
+  <script src="../assets/js/data/demo-data.js"></script>
+  <script src="../assets/js/data/question-bank.js"></script>
+  <script src="../assets/js/data/repo.js"></script>
+  <script src="../assets/js/core/ui.js"></script>
+  <script src="../assets/js/core/shell.js"></script>
+  <script src="../assets/vendor/chart.umd.min.js"></script>
+  <script src="../assets/js/core/charts.js"></script>
+  <script src="../assets/js/lib/exam-analytics.js"></script>
+  <script src="../assets/js/lib/study-analytics.js"></script>
+  <script src="../assets/js/lib/academic.js"></script>
+  <script src="../assets/js/lib/recommendation-engine.js"></script>
+  <script src="../assets/js/pages/reports.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exam Patterns | Brainy Buddy</title>
+  <meta name="description" content="Understand how you behave during examinations: time per question, answering order, revisions and time management.">
+  <meta name="theme-color" content="#ffa781">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <script src="../assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/viz.css">
+  <link rel="stylesheet" href="../assets/css/pages/app.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app__main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page" id="main" tabindex="-1">
+        <div class="page-header">
+          <div>
+            <div class="title-row"><h2>Examination behaviour analytics</h2><span id="demo-flag"></span></div>
+            <p>How you work through exams: where your time goes, the order you answer in, and what happens when you revise. Descriptions show what happened, never why.</p>
+          </div>
+        </div>
+
+        <form class="filter-bar" id="filters" aria-label="Filter analytics">
+          <div class="field"><label class="label" for="f-subject">Subject</label><select class="select select--sm" id="f-subject" name="subject"></select></div>
+          <div class="field"><label class="label" for="f-attempt">Examination</label><select class="select select--sm" id="f-attempt" name="attemptId"></select></div>
+          <div class="field"><label class="label" for="f-from">From</label><input class="input input--sm" type="date" id="f-from" name="from"></div>
+          <div class="field"><label class="label" for="f-to">To</label><input class="input input--sm" type="date" id="f-to" name="to"></div>
+          <div class="field"><label class="label" for="f-type">Question type</label>
+            <select class="select select--sm" id="f-type" name="type">
+              <option value="all">All types</option>
+              <option value="objective">Objective (multiple choice, true/false)</option>
+              <option value="subjective">Subjective (short and long answer)</option>
+              <option value="mcq">Multiple choice</option>
+              <option value="tf">True or false</option>
+              <option value="short">Short answer</option>
+              <option value="long">Long answer</option>
+            </select>
+          </div>
+          <p class="text-xs text-secondary span-all" id="filter-summary" aria-live="polite" style="margin:0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"></p>
+        </form>
+
+        <div id="analytics-content">
+          <section class="section" aria-labelledby="ov-title">
+            <h2 class="visually-hidden" id="ov-title">Analytics overview</h2>
+            <div class="grid grid--5" id="ov-metrics"></div>
+            <details class="definition" id="tms-definition">
+              <summary>How the time management score is calculated</summary>
+              <div id="tms-body"></div>
+            </details>
+          </section>
+
+          <section class="section" aria-labelledby="qb-title">
+            <div class="section__header"><div><h2 class="section__title" id="qb-title">Question behaviour analysis</h2><p class="section__desc" id="qb-desc"></p></div></div>
+            <div class="grid grid--main-side">
+              <article class="panel" aria-labelledby="c1-title">
+                <div class="panel__header"><div><h3 class="panel__title" id="c1-title">Time spent per question</h3><p class="panel__subtitle" id="c1-sub"></p></div></div>
+                <div class="chart-box chart-box--lg"><canvas id="chart-time" role="img" aria-label="Time spent per question"></canvas></div>
+              </article>
+              <article class="panel" aria-labelledby="c4-title">
+                <div class="panel__header"><div><h3 class="panel__title" id="c4-title">Correct versus incorrect answers</h3><p class="panel__subtitle">By question type</p></div></div>
+                <div class="chart-box chart-box--lg"><canvas id="chart-correctness" role="img" aria-label="Correct, incorrect and unanswered questions by type"></canvas></div>
+              </article>
+            </div>
+
+            <article class="panel section" aria-labelledby="c2-title">
+              <div class="panel__header">
+                <div><h3 class="panel__title" id="c2-title">Question answering sequence</h3><p class="panel__subtitle" id="c2-sub"></p></div>
+                <div class="legend" aria-hidden="true">
+                  <span class="legend__item" style="color:var(--color-objective)"><span class="legend__swatch"></span><span class="text-secondary">Objective</span></span>
+                  <span class="legend__item" style="color:var(--color-subjective)"><span class="legend__swatch"></span><span class="text-secondary">Written</span></span>
+                  <span class="legend__item" style="color:var(--color-primary)"><span class="legend__swatch legend__swatch--line"></span><span class="text-secondary">Moved forward</span></span>
+                  <span class="legend__item" style="color:var(--bb-amber)"><span class="legend__swatch legend__swatch--dashed"></span><span class="text-secondary">Went back</span></span>
+                </div>
+              </div>
+              <div id="sequence-path"></div>
+              <p class="text-sm" id="sequence-text" style="margin-top:12px"></p>
+              <p class="text-sm text-secondary" id="opening-text" style="margin-top:4px"></p>
+            </article>
+
+            <div class="grid grid--main-side section">
+              <article class="panel" aria-labelledby="c3-title">
+                <div class="panel__header"><div><h3 class="panel__title" id="c3-title">Answer changes and revisions</h3><p class="panel__subtitle">Answer changes and returns to a question, by question number</p></div></div>
+                <div class="chart-box"><canvas id="chart-changes" role="img" aria-label="Answer changes and revisits per question"></canvas></div>
+              </article>
+              <article class="panel" aria-labelledby="c3b-title">
+                <div class="panel__header"><div><h3 class="panel__title" id="c3b-title">What changed answers became</h3><p class="panel__subtitle">Objective questions only</p></div></div>
+                <div class="chart-box"><canvas id="chart-change-outcomes" role="img" aria-label="Outcomes of changed objective answers"></canvas></div>
+              </article>
+            </div>
+
+            <article class="panel section panel--flush" aria-labelledby="c5-title">
+              <div class="panel__header" style="padding:24px 24px 0"><div><h3 class="panel__title" id="c5-title">Unanswered questions</h3><p class="panel__subtitle" id="c5-sub"></p></div></div>
+              <div id="unanswered-table"></div>
+            </article>
+          </section>
+
+          <section class="section" aria-labelledby="tc-title">
+            <div class="section__header"><div><h2 class="section__title" id="tc-title">Question type comparison</h2><p class="section__desc">Objective (multiple choice, true/false) compared with subjective (short and long answer) questions</p></div></div>
+            <div class="grid">
+              <div class="panel panel--flush" id="type-table"></div>
+              <article class="panel" aria-labelledby="tcc-title">
+                <div class="panel__header"><div><h3 class="panel__title" id="tcc-title">Share of time vs share of marks</h3></div></div>
+                <div class="chart-box chart-box--sm"><canvas id="chart-type-compare" role="img" aria-label="Share of exam time compared with share of marks for objective and subjective questions"></canvas></div>
+              </article>
+            </div>
+          </section>
+
+          <section class="section panel" aria-labelledby="tl-title">
+            <div class="panel__header">
+              <div><h2 class="panel__title" id="tl-title">Examination timeline</h2><p class="panel__subtitle" id="tl-sub"></p></div>
+              <div class="legend" aria-hidden="true">
+                <span class="legend__item" style="color:var(--color-objective)"><span class="legend__swatch"></span><span class="text-secondary">On an objective question</span></span>
+                <span class="legend__item" style="color:var(--color-subjective)"><span class="legend__swatch"></span><span class="text-secondary">On a written question</span></span>
+                <span class="legend__item" style="color:var(--bb-rose)"><span class="legend__swatch legend__swatch--dashed"></span><span class="text-secondary">Final 10% of time</span></span>
+              </div>
+            </div>
+            <div class="timeline" id="timeline"></div>
+          </section>
+
+          <section class="section" aria-labelledby="ins-title">
+            <div class="section__header">
+              <div>
+                <div class="title-row"><h2 class="section__title" id="ins-title">AI behaviour insights</h2><span class="badge badge--outline">Rule-based demo</span></div>
+                <p class="section__desc">Generated by transparent rules from the exams in your current filter. They describe patterns in the data and never assume a reason.</p>
+              </div>
+            </div>
+            <div class="stack" id="insights" style="--stack-gap:16px"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/utils.js"></script>
+  <script src="../assets/js/core/storage.js"></script>
+  <script src="../assets/js/core/icons.js"></script>
+  <script src="../assets/js/core/mascot.js"></script>
+  <script src="../assets/js/core/theme.js"></script>
+  <script src="../assets/js/core/feedback.js"></script>
+  <script src="../assets/js/core/forms.js"></script>
+  <script src="../assets/js/core/auth.js"></script>
+  <script src="../assets/js/data/demo-data.js"></script>
+  <script src="../assets/js/data/question-bank.js"></script>
+  <script src="../assets/js/data/repo.js"></script>
+  <script src="../assets/js/core/ui.js"></script>
+  <script src="../assets/js/core/shell.js"></script>
+  <script src="../assets/vendor/chart.umd.min.js"></script>
+  <script src="../assets/js/core/charts.js"></script>
+  <script src="../assets/js/lib/exam-analytics.js"></script>
+  <script src="../assets/js/lib/arc-path.js"></script>
+  <script src="../assets/js/lib/recommendation-engine.js"></script>
+  <script src="../assets/js/pages/analytics.js"></script>
+</body>
+</html>

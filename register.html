@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" data-root="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create an account | Brainy Buddy</title>
+  <meta name="description" content="Create your Brainy Buddy account.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <script src="assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/pages/auth.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="auth">
+    <div class="auth__form-side">
+      <div class="auth__top">
+        <a class="brand" href="index.html" aria-label="Brainy Buddy home"><span data-brand-mark></span><span class="brand__name">Brainy<span>Buddy</span></span></a>
+        <button type="button" class="topbar__icon-btn" data-theme-toggle></button>
+      </div>
+
+      <main class="auth__form-wrap" id="main" tabindex="-1">
+        <h1 class="auth__title">Create your account</h1>
+        <p class="auth__lede">It takes about a minute. You'll set up your subjects and goals next.</p>
+
+        <form class="auth__form" id="register-form" novalidate>
+          <div class="alert alert--danger" id="register-summary" role="alert" tabindex="-1" hidden></div>
+
+          <div class="field">
+            <label class="label" for="name">Full name</label>
+            <input class="input" id="name" name="name" type="text" autocomplete="name" required maxlength="80">
+            <p class="field-error" id="name-error"></p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="email">Email address</label>
+            <input class="input" id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com">
+            <p class="field-error" id="email-error"></p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="password">Password</label>
+            <div class="input-group">
+              <input class="input" id="password" name="password" type="password" autocomplete="new-password" required aria-describedby="password-hint">
+              <button type="button" class="input-group__action" data-toggle-password="password"></button>
+            </div>
+            <div class="strength" id="strength" data-score="0" aria-hidden="true">
+              <span class="strength__bars"><i></i><i></i><i></i><i></i></span>
+              <span class="strength__label" id="strength-label"></span>
+            </div>
+            <p class="hint" id="password-hint">At least 8 characters, with a letter and a number.</p>
+            <p class="field-error" id="password-error"></p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="confirmPassword">Confirm password</label>
+            <div class="input-group">
+              <input class="input" id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" required>
+              <button type="button" class="input-group__action" data-toggle-password="confirmPassword"></button>
+            </div>
+            <p class="field-error" id="confirmPassword-error"></p>
+          </div>
+
+          <fieldset class="field" style="border:0;padding:0;margin-inline:0">
+            <legend class="label" style="margin-bottom:8px">Education level</legend>
+            <div class="option-grid level-options" id="level-options"></div>
+            <p class="field-error" id="educationLevel-error"></p>
+          </fieldset>
+
+          <div class="field">
+            <label class="label" for="institution">Institution name <span class="optional">(optional)</span></label>
+            <input class="input" id="institution" name="institution" type="text" autocomplete="organization" maxlength="120" placeholder="For example, Riverside Secondary School">
+            <p class="field-error" id="institution-error"></p>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--lg btn--block auth__submit" id="register-submit">Create account</button>
+        </form>
+
+        <p class="auth__switch">Already have an account? <a href="login.html">Sign in</a></p>
+      </main>
+
+      <p class="auth__foot">Demo registration: your account is created only in this browser. No email is sent.</p>
+    </div>
+
+    <aside class="auth__brand-side" aria-label="About Brainy Buddy">
+      <p class="auth__tagline">Every exam teaches you something. Brainy Buddy helps you see what.</p>
+      <div class="auth__mascot" data-mascot="thinking"></div>
+      <ul class="auth__facts">
+        <li><span data-icon="check-circle"></span>For primary, secondary, college and university students</li>
+        <li><span data-icon="check-circle"></span>Practice exams that record how you answer</li>
+        <li><span data-icon="check-circle"></span>Recommendations you can measure progress against</li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/storage.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/mascot.js"></script>
+  <script src="assets/js/core/theme.js"></script>
+  <script src="assets/js/core/feedback.js"></script>
+  <script src="assets/js/core/forms.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/shell.js"></script>
+  <script src="assets/js/data/demo-data.js"></script>
+  <script src="assets/js/pages/auth-pages.js"></script>
+</body>
+</html>

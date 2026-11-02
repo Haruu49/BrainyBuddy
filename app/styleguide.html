@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design system | Brainy Buddy</title>
+  <meta name="description" content="The Brainy Buddy design system: colours, typography, components, mascot and icons.">
+  <meta name="theme-color" content="#ffa781">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <script src="../assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/viz.css">
+  <link rel="stylesheet" href="../assets/css/pages/app.css">
+  <link rel="stylesheet" href="../assets/css/pages/styleguide.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app__main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page" id="main" tabindex="-1">
+        <div class="page-header">
+          <div>
+            <h2>Brainy Buddy design system</h2>
+            <p>The tokens and components every page is built from. Switch the theme in the top bar to check both modes.</p>
+          </div>
+        </div>
+
+        <section class="panel sg-section" aria-labelledby="sg-colour">
+          <h3 class="panel__title" id="sg-colour">Colour</h3>
+          <p class="panel__subtitle" style="margin-bottom:20px">Indigo always marks objective questions and teal always marks written (subjective) questions, on every chart.</p>
+          <div class="swatches" id="swatches"></div>
+        </section>
+
+        <section class="panel sg-section" aria-labelledby="sg-type">
+          <h3 class="panel__title" id="sg-type">Typography</h3>
+          <p class="panel__subtitle" style="margin-bottom:12px">Inter throughout. Major-third scale (1.25), tight tracking on headings, tabular figures for numbers.</p>
+          <div class="type-scale">
+            <div><span>Display 800</span><span style="font-size:var(--text-display);font-weight:800;letter-spacing:var(--tracking-tighter);line-height:1.05">Learn Smarter.</span></div>
+            <div><span>H1 31px 700</span><span style="font-size:var(--text-2xl);font-weight:700;letter-spacing:var(--tracking-tight)">Understand yourself</span></div>
+            <div><span>H2 25px 700</span><span style="font-size:var(--text-xl);font-weight:700;letter-spacing:var(--tracking-tight)">Examination behaviour</span></div>
+            <div><span>H3 20px 700</span><span style="font-size:var(--text-lg);font-weight:700">Time spent per question</span></div>
+            <div><span>Body 16px 400</span><span>Brainy Buddy describes what happened in your data, never why you did it.</span></div>
+            <div><span>Small 14px</span><span class="text-sm text-secondary">Secondary text for supporting details and hints.</span></div>
+            <div><span>Metric 39px 750</span><span class="metric__value" style="font-size:var(--text-3xl)">78<small>%</small></span></div>
+          </div>
+        </section>
+
+        <section class="panel sg-section" aria-labelledby="sg-buttons">
+          <h3 class="panel__title" id="sg-buttons">Buttons</h3>
+          <div class="sg-row" style="margin-top:16px">
+            <button type="button" class="btn btn--primary">Primary</button>
+            <button type="button" class="btn">Secondary</button>
+            <button type="button" class="btn btn--soft">Soft</button>
+            <button type="button" class="btn btn--accent">Accent</button>
+            <button type="button" class="btn btn--ghost">Ghost</button>
+            <button type="button" class="btn btn--danger">Danger</button>
+            <button type="button" class="btn btn--danger-outline">Danger outline</button>
+          </div>
+          <div class="sg-row">
+            <button type="button" class="btn btn--primary btn--lg" data-icon="play">Large with icon</button>
+            <button type="button" class="btn btn--sm">Small</button>
+            <button type="button" class="btn btn--icon" aria-label="Settings" data-icon="settings"></button>
+            <button type="button" class="btn btn--primary" disabled>Disabled</button>
+            <button type="button" class="btn btn--primary" id="sg-loading">Click to load</button>
+            <button type="button" class="link-btn">Link button</button>
+          </div>
+        </section>
+
+        <section class="panel sg-section" aria-labelledby="sg-badges">
+          <h3 class="panel__title" id="sg-badges">Badges, chips and status</h3>
+          <div class="sg-row" style="margin-top:16px">
+            <span class="badge">Neutral</span><span class="badge badge--primary">Primary</span><span class="badge badge--success">Success</span><span class="badge badge--warning">Warning</span><span class="badge badge--danger">Danger</span><span class="badge badge--outline">Outline</span><span class="badge badge--demo">Demo data</span><span class="badge badge--objective">Multiple choice</span><span class="badge badge--subjective">Long answer</span>
+          </div>
+          <div class="sg-row chip-group" id="sg-chips">
+            <button type="button" class="chip" aria-pressed="true">Algebra</button><button type="button" class="chip" aria-pressed="false">Geometry</button><button type="button" class="chip" aria-pressed="false">Statistics</button>
+          </div>
+          <div class="sg-row">
+            <span class="confidence" data-level="high"><span class="confidence__bars" aria-hidden="true"><i></i><i></i><i></i></span>High confidence</span>
+            <span class="confidence" data-level="medium"><span class="confidence__bars" aria-hidden="true"><i></i><i></i><i></i></span>Medium confidence</span>
+            <span class="confidence" data-level="low"><span class="confidence__bars" aria-hidden="true"><i></i><i></i><i></i></span>Low confidence</span>
+            <span class="score-pill score-pill--high">82%</span><span class="score-pill score-pill--mid">61%</span><span class="score-pill score-pill--low">38%</span>
+          </div>
+          <div class="sg-row" style="max-width:420px;display:block">
+            <div class="progress" role="progressbar" aria-label="Example progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64" style="--value:64%"><span class="progress__bar"></span></div>
+          </div>
+        </section>
+
+        <section class="panel sg-section" aria-labelledby="sg-forms">
+          <h3 class="panel__title" id="sg-forms">Form controls</h3>
+          <form id="sg-form" novalidate style="margin-top:16px">
+            <div class="field-row">
+              <div class="field"><label class="label" for="sg-text">Text input</label><input class="input" id="sg-text" name="text" placeholder="Type something"><p class="hint">Hint text explains the expected format.</p></div>
+              <div class="field"><label class="label" for="sg-email">Email with validation</label><input class="input" id="sg-email" name="email" type="email" value="not-an-email"><p class="field-error" id="sg-email-error"></p></div>
+              <div class="field"><label class="label" for="sg-select">Select</label><select class="select" id="sg-select"><option>Mathematics</option><option>Physics</option></select></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label class="label" for="sg-pw">Password</label><div class="input-group"><input class="input" id="sg-pw" type="password" value="Secret123"><button type="button" class="input-group__action" data-toggle-password="sg-pw"></button></div></div>
+              <div class="field"><label class="label" for="sg-dis">Disabled</label><input class="input" id="sg-dis" disabled value="Can't edit"></div>
+              <div class="field"><label class="label" for="sg-area">Textarea</label><textarea class="textarea" id="sg-area" style="min-height:44px"></textarea></div>
+            </div>
+            <div class="sg-row" style="margin-top:20px">
+              <label class="check"><input type="checkbox" checked><span>Checkbox</span></label>
+              <label class="check"><input type="radio" name="sg-r" checked><span>Radio one</span></label>
+              <label class="check"><input type="radio" name="sg-r"><span>Radio two</span></label>
+              <label class="switch" style="gap:12px"><span class="switch__text"><strong>Switch</strong></span><input type="checkbox" checked></label>
+              <div class="segmented" role="radiogroup" aria-label="Segmented example"><label><input type="radio" name="sg-seg" checked><span>Week</span></label><label><input type="radio" name="sg-seg"><span>Month</span></label><label><input type="radio" name="sg-seg"><span>Year</span></label></div>
+            </div>
+            <fieldset style="border:0;padding:0;margin:20px 0 0"><legend class="label" style="margin-bottom:8px">Option cards</legend>
+              <div class="option-grid">
+                <label class="option-card"><input type="radio" name="sg-opt" checked><span class="option-card__body"><strong>Secondary school</strong><span>Ages 12 to 18</span></span></label>
+                <label class="option-card"><input type="radio" name="sg-opt"><span class="option-card__body"><strong>University</strong><span>Undergraduate or postgraduate</span></span></label>
+              </div>
+            </fieldset>
+            <div class="sg-row" style="margin-top:20px"><button type="submit" class="btn btn--primary">Validate this form</button></div>
+          </form>
+        </section>
+
+        <section class="sg-section" aria-labelledby="sg-cards">
+          <h3 class="section__title" id="sg-cards" style="margin-bottom:16px">Cards and patterns</h3>
+          <div class="grid grid--4" id="sg-metrics"></div>
+          <div class="grid grid--2" style="margin-top:20px">
+            <div id="sg-insight"></div>
+            <div class="stack">
+              <div class="alert alert--info"><span data-icon="info"></span><div><p class="alert__title">Information</p><p>Neutral guidance and context.</p></div></div>
+              <div class="alert alert--success"><span data-icon="check-circle"></span><div><p class="alert__title">Success</p><p>Something worked as expected.</p></div></div>
+              <div class="alert alert--warning"><span data-icon="alert"></span><div><p class="alert__title">Warning</p><p>Worth checking before you continue.</p></div></div>
+              <div class="alert alert--danger"><span data-icon="alert-circle"></span><div><p class="alert__title">Error</p><p>What went wrong and how to fix it.</p></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel sg-section" aria-labelledby="sg-nav">
+          <h3 class="panel__title" id="sg-nav">Navigation and feedback</h3>
+          <div class="tabs" role="tablist" aria-label="Example tabs" style="margin-top:16px">
+            <button type="button" class="tab" role="tab" aria-selected="true" id="sgt-1" aria-controls="sgp-1">Overview</button>
+            <button type="button" class="tab" role="tab" aria-selected="false" id="sgt-2" aria-controls="sgp-2" tabindex="-1">Details</button>
+          </div>
+          <div role="tabpanel" id="sgp-1" aria-labelledby="sgt-1" style="padding:16px 0" class="text-sm">Tabs use arrow keys to move between tabs.</div>
+          <div role="tabpanel" id="sgp-2" aria-labelledby="sgt-2" style="padding:16px 0" class="text-sm" hidden>Second tab panel.</div>
+          <ol class="stepper" aria-label="Example stepper" style="margin:8px 0 20px"><li class="stepper__item is-done"><span class="stepper__label">1. Select</span></li><li class="stepper__item is-current" aria-current="step"><span class="stepper__label">2. Review</span></li><li class="stepper__item"><span class="stepper__label">3. Confirm</span></li></ol>
+          <div class="sg-row">
+            <button type="button" class="btn" data-toast="success">Show success toast</button>
+            <button type="button" class="btn" data-toast="error">Show error toast</button>
+            <button type="button" class="btn" id="sg-dialog">Open a dialog</button>
+            <div class="menu-anchor"><button type="button" class="btn" id="sg-menu-btn">Open a menu</button>
+              <div class="menu" id="sg-menu" style="left:0;right:auto"><a class="menu__item" href="#sg-nav">First item</a><button type="button" class="menu__item">Second item</button><div class="menu__sep" role="separator"></div><button type="button" class="menu__item menu__item--danger">Danger item</button></div></div>
+          </div>
+        </section>
+
+        <section class="panel sg-section" aria-labelledby="sg-states">
+          <h3 class="panel__title" id="sg-states">Loading, empty and error states</h3>
+          <div class="grid grid--3" style="margin-top:16px">
+            <div><p class="sg-label">Loading</p><div class="panel panel--sunken"><div class="skeleton" style="height:18px;width:60%"></div><div class="skeleton" style="height:12px;margin-top:12px"></div><div class="skeleton" style="height:12px;margin-top:8px;width:80%"></div><div style="display:flex;gap:8px;align-items:center;margin-top:16px;color:var(--color-primary)"><span class="spinner" aria-hidden="true"></span><span class="text-sm">Loading your data…</span></div></div></div>
+            <div><p class="sg-label">Empty</p><div class="panel panel--sunken" id="sg-empty"></div></div>
+            <div><p class="sg-label">Chart error</p><div class="chart-box chart-box--sm"><div class="chart-fallback">This chart couldn't be displayed because the chart library didn't load. Reload the page to try again.</div></div></div>
+          </div>
+        </section>
+
+        <section class="panel sg-section" aria-labelledby="sg-mascot">
+          <h3 class="panel__title" id="sg-mascot">Buddy, the mascot</h3>
+          <p class="panel__subtitle" style="margin-bottom:16px">A brain with visible folds and smart glasses. Buddy appears at guide moments (onboarding, empty states, results), not on every screen.</p>
+          <div class="mascot-row" id="sg-mascots"></div>
+        </section>
+
+        <section class="panel sg-section" aria-labelledby="sg-icons">
+          <h3 class="panel__title" id="sg-icons">Icons</h3>
+          <p class="panel__subtitle" style="margin-bottom:16px">One 24px stroke set at 1.85px. Decorative icons are hidden from screen readers.</p>
+          <div class="icon-grid" id="sg-icon-grid"></div>
+        </section>
+
+        <section class="panel sg-section" aria-labelledby="sg-layout">
+          <h3 class="panel__title" id="sg-layout">Responsive layout</h3>
+          <div class="bp-list" style="margin-top:16px">
+            <div class="panel panel--sunken"><strong>Desktop, 1200px and up</strong><p class="text-sm text-secondary" style="margin-top:4px">Full sidebar (collapsible to a rail), 4-column metric grids.</p></div>
+            <div class="panel panel--sunken"><strong>Tablet, 768 to 1199px</strong><p class="text-sm text-secondary" style="margin-top:4px">Icon rail with tooltips, 2-column grids.</p></div>
+            <div class="panel panel--sunken"><strong>Mobile, under 768px</strong><p class="text-sm text-secondary" style="margin-top:4px">Navigation in a drawer, single column, 16px gutters.</p></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/utils.js"></script>
+  <script src="../assets/js/core/storage.js"></script>
+  <script src="../assets/js/core/icons.js"></script>
+  <script src="../assets/js/core/mascot.js"></script>
+  <script src="../assets/js/core/theme.js"></script>
+  <script src="../assets/js/core/feedback.js"></script>
+  <script src="../assets/js/core/forms.js"></script>
+  <script src="../assets/js/core/auth.js"></script>
+  <script src="../assets/js/data/demo-data.js"></script>
+  <script src="../assets/js/data/question-bank.js"></script>
+  <script src="../assets/js/data/repo.js"></script>
+  <script src="../assets/js/core/ui.js"></script>
+  <script src="../assets/js/core/shell.js"></script>
+  <script src="../assets/js/lib/exam-analytics.js"></script>
+  <script src="../assets/js/lib/recommendation-engine.js"></script>
+  <script src="../assets/js/pages/styleguide.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" data-root="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | Brainy Buddy</title>
+  <meta name="description" content="Sign in to Brainy Buddy.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <script src="assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/pages/auth.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="auth">
+    <div class="auth__form-side">
+      <div class="auth__top">
+        <a class="brand" href="index.html" aria-label="Brainy Buddy home"><span data-brand-mark></span><span class="brand__name">Brainy<span>Buddy</span></span></a>
+        <button type="button" class="topbar__icon-btn" data-theme-toggle></button>
+      </div>
+
+      <main class="auth__form-wrap" id="main" tabindex="-1">
+        <h1 class="auth__title">Welcome back</h1>
+        <p class="auth__lede">Sign in to see your exam patterns and study progress.</p>
+
+        <form class="auth__form" id="login-form" novalidate>
+          <div class="alert alert--info" id="login-notice" role="status" hidden></div>
+          <div class="alert alert--danger" id="login-error" role="alert" hidden></div>
+
+          <div class="field">
+            <label class="label" for="email">Email address</label>
+            <div class="input-group">
+              <span class="input-group__icon-start" data-icon="mail"></span>
+              <input class="input" id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com">
+            </div>
+            <p class="field-error" id="email-error"></p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="password">Password</label>
+            <div class="input-group">
+              <span class="input-group__icon-start" data-icon="lock"></span>
+              <input class="input" id="password" name="password" type="password" autocomplete="current-password" required>
+              <button type="button" class="input-group__action" data-toggle-password="password"></button>
+            </div>
+            <p class="field-error" id="password-error"></p>
+          </div>
+
+          <div class="auth__row">
+            <label class="check"><input type="checkbox" name="remember" id="remember" checked> <span>Remember me on this device</span></label>
+            <a href="forgot-password.html" class="text-sm fw-600">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--lg btn--block auth__submit" id="login-submit">Sign in</button>
+        </form>
+
+        <div class="auth__divider">or</div>
+        <button type="button" class="btn btn--block" id="demo-signin" data-icon="sparkles">Open the demo account</button>
+        <p class="hint" style="margin-top:8px;text-align:center">Loads a sample student with realistic demo data.</p>
+
+        <p class="auth__switch">New to Brainy Buddy? <a href="register.html">Create an account</a></p>
+      </main>
+
+      <p class="auth__foot">Demo sign-in: accounts are simulated and stored only in this browser.</p>
+    </div>
+
+    <aside class="auth__brand-side" aria-label="About Brainy Buddy">
+      <p class="auth__tagline">Learn Smarter. Understand Yourself.</p>
+      <div class="auth__mascot" data-mascot="wave"></div>
+      <ul class="auth__facts">
+        <li><span data-icon="check-circle"></span>Real time spent on every question, not estimates</li>
+        <li><span data-icon="check-circle"></span>Patterns explained with evidence and confidence</li>
+        <li><span data-icon="check-circle"></span>Your data stays in your browser in this demo</li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/storage.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/mascot.js"></script>
+  <script src="assets/js/core/theme.js"></script>
+  <script src="assets/js/core/feedback.js"></script>
+  <script src="assets/js/core/forms.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/shell.js"></script>
+  <script src="assets/js/pages/auth-pages.js"></script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en" data-root="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brainy Buddy | Learn Smarter. Understand Yourself.</title>
+  <meta name="description" content="Brainy Buddy helps students understand their examination behaviour, study habits and learning patterns, with evidence behind every suggestion.">
+  <meta name="theme-color" content="#ffa781">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <script src="assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/viz.css">
+  <link rel="stylesheet" href="assets/css/pages/landing.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Brainy Buddy home">
+        <span data-brand-mark></span>
+        <span class="brand__name">Brainy<span>Buddy</span></span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#evidence">Our approach</a>
+        <a href="login.html" class="site-nav__signin-mobile">Sign in</a>
+        <button type="button" class="site-nav__theme" id="nav-theme-toggle">Switch theme</button>
+      </nav>
+      <div class="site-header__actions">
+        <button type="button" class="topbar__icon-btn site-header__theme" data-theme-toggle></button>
+        <a class="btn btn--ghost site-header__signin" href="login.html">Sign in</a>
+        <a class="btn btn--primary" href="register.html">Get started</a>
+        <button type="button" class="topbar__icon-btn site-header__menu" id="site-menu-btn" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" data-icon="menu"></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div>
+          <h1 class="hero__title" id="hero-title"><span>Understand How You Learn.</span> <span>Improve How You Perform.</span></h1>
+          <p class="hero__lede">Brainy Buddy records how you move through practice exams and how you study, then shows you the patterns behind your marks. Every suggestion comes with the evidence and how confident it is.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="register.html">Get started</a>
+            <a class="btn btn--lg" href="login.html">Sign in</a>
+          </div>
+          <p class="hero__note">Just exploring? <button type="button" class="link-btn" data-demo-signin>Open the demo account</button> with sample data.</p>
+        </div>
+
+        <figure class="path-card" aria-labelledby="path-card-title">
+          <div class="path-card__head">
+            <div>
+              <p class="path-card__title" id="path-card-title">Answer path, Physics practice paper</p>
+              <p class="path-card__meta">The order one student moved through 10 questions</p>
+            </div>
+            <span class="badge badge--demo">Example</span>
+          </div>
+          <div class="path-card__body">
+            <div id="hero-path"></div>
+            <div class="legend" aria-hidden="true">
+              <span class="legend__item" style="color:var(--color-objective)"><span class="legend__swatch"></span><span style="color:var(--color-text-secondary)">Objective question</span></span>
+              <span class="legend__item" style="color:var(--color-subjective)"><span class="legend__swatch"></span><span style="color:var(--color-text-secondary)">Written question</span></span>
+              <span class="legend__item" style="color:var(--color-primary)"><span class="legend__swatch legend__swatch--line"></span><span style="color:var(--color-text-secondary)">Moved forward</span></span>
+              <span class="legend__item" style="color:var(--bb-amber)"><span class="legend__swatch legend__swatch--dashed"></span><span style="color:var(--color-text-secondary)">Went back</span></span>
+            </div>
+            <figcaption class="path-card__buddy">
+              <div data-mascot="happy"></div>
+              <p class="speech">This student started with the written questions, then went back to Q2 and Q4. <strong>Their change on Q4 was correct.</strong> Brainy Buddy records this without judging the order.</p>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="levels" aria-label="Who Brainy Buddy is for">
+      <div class="container levels__inner">
+        <p class="levels__label">Made for students at every stage</p>
+        <ul class="levels__list">
+          <li><span data-icon="backpack"></span>Primary school</li>
+          <li><span data-icon="school"></span>Secondary school</li>
+          <li><span data-icon="building"></span>College</li>
+          <li><span data-icon="cap"></span>University</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="l-section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="l-section__head">
+          <h2 id="features-title">See what happens between the question and the mark</h2>
+          <p>Marks tell you how an exam went. Brainy Buddy shows how you got there: where your time went, which answers you changed, and when you study best.</p>
+        </div>
+        <div class="features">
+          <article class="feature-lead">
+            <h3>Examination behaviour analytics</h3>
+            <p>Take timed practice exams with multiple-choice, true/false, short and long questions. Brainy Buddy measures the real time you spend on each question, the order you answer in, and every change you make.</p>
+            <div class="feature-lead__viz" aria-hidden="true">
+              <div class="mini-bars">
+                <span style="height:28%"></span><span style="height:22%"></span><span style="height:46%"></span><span style="height:18%"></span><span style="height:31%"></span><span style="height:14%"></span>
+                <span class="is-written" style="height:58%"></span><span class="is-written" style="height:96%"></span><span class="is-written" style="height:72%"></span>
+              </div>
+              <div class="mini-bars__axis"><span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span><span>Q5</span><span>Q6</span><span>Q7</span><span>Q8</span><span>Q9</span></div>
+              <div class="legend">
+                <span class="legend__item" style="color:var(--bb-peach)"><span class="legend__swatch"></span>Objective</span>
+                <span class="legend__item" style="color:var(--bb-teal)"><span class="legend__swatch"></span>Written</span>
+                <span class="legend__item">Time spent per question</span>
+              </div>
+            </div>
+          </article>
+          <ul class="feature-list">
+            <li><span class="feature-list__icon" data-icon="coffee"></span><div><h3>Study habit tracking</h3><p>Time your sessions, count breaks and rate your focus. See your consistency and which time of day works for you, once there's enough data to say.</p></div></li>
+            <li><span class="feature-list__icon" data-icon="sparkles"></span><div><h3>Recommendations with evidence</h3><p>Each suggestion shows the pattern it found, the numbers behind it, a confidence level and a measurable target.</p></div></li>
+            <li><span class="feature-list__icon" data-icon="upload"></span><div><h3>Bring in past results</h3><p>Import earlier exam results from a CSV file. Anything you didn't record stays marked as not recorded, never guessed.</p></div></li>
+            <li><span class="feature-list__icon" data-icon="calendar"></span><div><h3>Study planner</h3><p>Plan sessions around upcoming exams, with recommended sessions based on your own results.</p></div></li>
+            <li><span class="feature-list__icon" data-icon="file"></span><div><h3>Progress reports</h3><p>A printable report of your performance, exam behaviour and study habits to share with a parent or teacher.</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="l-section l-section--tint" id="how-it-works" aria-labelledby="how-title">
+      <div class="container">
+        <div class="l-section__head">
+          <h2 id="how-title">How it works</h2>
+          <p>Four steps, and the picture gets clearer with every exam and study session you add.</p>
+        </div>
+        <ol class="steps">
+          <li><h3>Set up your profile</h3><p>Choose your education level, add your subjects and pick the goals that matter to you.</p></li>
+          <li><h3>Practise or import</h3><p>Take a timed practice exam in the simulator, or upload results from exams you've already sat.</p></li>
+          <li><h3>Track your study</h3><p>Start a timer when you study. Log breaks and rate your focus when you finish.</p></li>
+          <li><h3>Review and act</h3><p>Check the patterns, follow a recommendation, and watch its progress against a clear target.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="l-section" id="evidence" aria-labelledby="evidence-title">
+      <div class="container evidence">
+        <div>
+          <h2 id="evidence-title" style="font-size:clamp(1.75rem,1.2rem + 1.6vw,2.44rem);letter-spacing:var(--tracking-tighter)">Evidence first, never guesswork</h2>
+          <p class="text-secondary" style="margin-top:16px;font-size:var(--text-md);line-height:var(--leading-relaxed)">Brainy Buddy describes what happened in your data, not why you did it. When there isn't enough data, it says so.</p>
+          <ul class="evidence__points">
+            <li><span data-icon="check-circle"></span><span>Every insight lists the numbers it is based on.</span></li>
+            <li><span data-icon="check-circle"></span><span>Confidence depends on how much data there is.</span></li>
+            <li><span data-icon="check-circle"></span><span>No study order or habit is assumed to be right or wrong.</span></li>
+            <li><span data-icon="check-circle"></span><span>Targets are measurable, so you can see progress.</span></li>
+          </ul>
+        </div>
+        <article class="insight" data-category="Time Management" aria-label="Example insight">
+          <header class="insight__head">
+            <span class="insight__icon" data-icon="timer"></span>
+            <div class="insight__heading">
+              <p class="insight__category">Time Management <span class="badge badge--demo" style="margin-left:6px">Example</span></p>
+              <h3 class="insight__title">Written questions take a larger share of time than of marks</h3>
+            </div>
+            <span class="confidence" data-level="high"><span class="confidence__bars" aria-hidden="true"><i></i><i></i><i></i></span>High</span>
+          </header>
+          <dl class="insight__body">
+            <div><dt>Detected pattern</dt><dd>Your subjective questions used 65% of your examination time and carry 48% of the marks.</dd></div>
+            <div><dt>Supporting evidence</dt><dd><ul><li>Seen in 5 of your last 6 exams.</li><li>Objective accuracy was 58% in the final section, compared with 81% earlier.</li></ul></dd></div>
+            <div><dt>Recommended action</dt><dd>Practise timed subjective questions and reserve enough time for the objective ones.</dd></div>
+            <div><dt>Improvement target</dt><dd class="insight__target">Subjective time share at or below 53% in your next 3 exams.</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section class="container" aria-labelledby="cta-title">
+      <div class="cta-band">
+        <div>
+          <h2 id="cta-title">Ready to see how you learn?</h2>
+          <p>Create a free demo profile in under a minute. Your data stays in your browser.</p>
+          <div class="cta-band__actions">
+            <a class="btn btn--primary btn--lg" href="register.html">Get started</a>
+            <a class="btn btn--lg" href="login.html">Sign in</a>
+          </div>
+        </div>
+        <div class="cta-band__mascot" data-mascot="wave"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <a class="brand" href="index.html" aria-label="Brainy Buddy home"><span data-brand-mark></span><span class="brand__name">Brainy<span>Buddy</span></span></a>
+          <p>Learn Smarter. Understand Yourself.</p>
+        </div>
+        <nav aria-labelledby="footer-product">
+          <h2 id="footer-product">Product</h2>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#evidence">Our approach</a></li>
+            <li><a href="app/styleguide.html">Design system</a></li>
+          </ul>
+        </nav>
+        <nav aria-labelledby="footer-account">
+          <h2 id="footer-account">Account</h2>
+          <ul>
+            <li><a href="login.html">Sign in</a></li>
+            <li><a href="register.html">Create an account</a></li>
+            <li><button type="button" data-demo-signin>Open the demo account</button></li>
+          </ul>
+        </nav>
+        <div aria-labelledby="footer-about">
+          <h2 id="footer-about">About this demo</h2>
+          <ul>
+            <li><button type="button" data-open-dialog="demo-notice">Demo and privacy notice</button></li>
+            <li><a href="forgot-password.html">Reset a password</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>&copy; <span id="year"></span> Brainy Buddy. Frontend demo.</span>
+        <span>Sample insights and data shown on this site are illustrative.</span>
+      </div>
+    </div>
+  </footer>
+
+  <dialog class="dialog" id="demo-notice" aria-labelledby="demo-notice-title">
+    <div class="dialog__header">
+      <h2 class="dialog__title" id="demo-notice-title">Demo and privacy notice</h2>
+      <button type="button" class="btn btn--ghost btn--icon btn--sm" data-dialog-close aria-label="Close dialog" data-icon="x"></button>
+    </div>
+    <div class="dialog__body prose">
+      <p>This is a frontend demo of Brainy Buddy. Sign-in is simulated: accounts, exams, study sessions and imported records are saved only in this browser's local storage.</p>
+      <p>Nothing is sent to a server. Recommendations come from transparent rules, not a connected AI model. You can export or delete your demo data at any time from Settings.</p>
+    </div>
+    <div class="dialog__footer"><button type="button" class="btn btn--primary" data-dialog-close>Got it</button></div>
+  </dialog>
+
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/storage.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/mascot.js"></script>
+  <script src="assets/js/core/theme.js"></script>
+  <script src="assets/js/core/feedback.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/shell.js"></script>
+  <script src="assets/js/lib/arc-path.js"></script>
+  <script src="assets/js/pages/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add Past Results | Brainy Buddy</title>
+  <meta name="description" content="Import historical examination records from a CSV file, preview and correct them before importing.">
+  <meta name="theme-color" content="#ffa781">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <script src="../assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/viz.css">
+  <link rel="stylesheet" href="../assets/css/pages/app.css">
+  <link rel="stylesheet" href="../assets/css/pages/upload.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app__main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page" id="main" tabindex="-1">
+        <div class="page-header">
+          <div>
+            <h2>Upload examination records</h2>
+            <p>Bring in results from exams you've already sat. You'll preview and check every row before anything is saved. Information your file doesn't include is shown as "Not recorded", never guessed.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="tabs" role="tablist" aria-label="File format">
+            <button type="button" class="tab" role="tab" id="tab-csv" aria-selected="true" aria-controls="panel-csv">CSV file</button>
+            <button type="button" class="tab" role="tab" id="tab-pdf" aria-selected="false" aria-controls="panel-pdf" tabindex="-1">PDF report <span class="badge" style="margin-left:4px">Coming soon</span></button>
+          </div>
+
+          <div role="tabpanel" id="panel-csv" aria-labelledby="tab-csv">
+            <ol class="stepper" id="import-stepper" style="margin-top:24px" aria-label="Import progress"></ol>
+            <div id="import-step" aria-live="polite"></div>
+          </div>
+
+          <div role="tabpanel" id="panel-pdf" aria-labelledby="tab-pdf" hidden>
+            <div class="import-step">
+              <div class="alert alert--info">
+                <span data-icon="info"></span>
+                <div><p class="alert__title">PDF import isn't available yet</p><p>Reading results from PDF report cards needs document processing, which will be added with the backend. You can still choose a file to see how it will work, but nothing will be extracted or saved.</p></div>
+              </div>
+              <label class="dropzone" style="margin-top:20px" id="pdf-drop">
+                <span class="dropzone__icon" data-icon="pdf"></span>
+                <span class="dropzone__title">Choose a PDF report</span>
+                <span class="dropzone__hint">Report cards or result slips, up to 10 MB</span>
+                <input type="file" id="pdf-input" accept="application/pdf,.pdf" aria-describedby="pdf-status">
+              </label>
+              <div id="pdf-status" style="margin-top:16px" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+
+        <section class="section" aria-labelledby="imported-title">
+          <div class="section__header">
+            <div><h2 class="section__title" id="imported-title">Imported records</h2><p class="section__desc">Used in your dashboard, subject results, reports and recommendations.</p></div>
+          </div>
+          <div id="imported-list"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/utils.js"></script>
+  <script src="../assets/js/core/storage.js"></script>
+  <script src="../assets/js/core/icons.js"></script>
+  <script src="../assets/js/core/mascot.js"></script>
+  <script src="../assets/js/core/theme.js"></script>
+  <script src="../assets/js/core/feedback.js"></script>
+  <script src="../assets/js/core/forms.js"></script>
+  <script src="../assets/js/core/auth.js"></script>
+  <script src="../assets/js/data/demo-data.js"></script>
+  <script src="../assets/js/data/question-bank.js"></script>
+  <script src="../assets/js/data/repo.js"></script>
+  <script src="../assets/js/core/ui.js"></script>
+  <script src="../assets/js/core/shell.js"></script>
+  <script src="../assets/js/lib/csv.js"></script>
+  <script src="../assets/js/lib/academic.js"></script>
+  <script src="../assets/js/pages/upload.js"></script>
+</body>
+</html>

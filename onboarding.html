@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-root="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Set up your profile | Brainy Buddy</title>
+  <meta name="description" content="Set up your Brainy Buddy profile.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <script src="assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/pages/auth.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="onboarding">
+    <header class="onboarding__top">
+      <a class="brand" href="index.html" aria-label="Brainy Buddy home"><span data-brand-mark></span><span class="brand__name">Brainy<span>Buddy</span></span></a>
+      <div class="cluster">
+        <button type="button" class="topbar__icon-btn" data-theme-toggle></button>
+        <button type="button" class="btn btn--ghost btn--sm" id="ob-signout" data-icon="logout">Sign out</button>
+      </div>
+    </header>
+
+    <div class="onboarding__main">
+      <aside class="guide" aria-live="polite">
+        <div class="guide__mascot" id="guide-mascot"></div>
+        <div class="guide__bubble" id="guide-bubble"></div>
+      </aside>
+
+      <main class="onboarding__card" id="main" tabindex="-1">
+        <ol class="stepper" id="ob-stepper" aria-label="Onboarding progress"></ol>
+        <form id="ob-form" novalidate>
+          <div id="ob-step"></div>
+          <div class="ob-actions">
+            <button type="button" class="btn" id="ob-back" data-icon="arrow-left">Back</button>
+            <button type="submit" class="btn btn--primary" id="ob-next">Continue</button>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/storage.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/mascot.js"></script>
+  <script src="assets/js/core/theme.js"></script>
+  <script src="assets/js/core/feedback.js"></script>
+  <script src="assets/js/core/forms.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/shell.js"></script>
+  <script src="assets/js/data/demo-data.js"></script>
+  <script src="assets/js/data/question-bank.js"></script>
+  <script src="assets/js/pages/onboarding.js"></script>
+</body>
+</html>

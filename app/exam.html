@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Practice Exams | Brainy Buddy</title>
+  <meta name="description" content="Take timed practice examinations while Brainy Buddy records your answering behaviour.">
+  <meta name="theme-color" content="#ffa781">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <script src="../assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/viz.css">
+  <link rel="stylesheet" href="../assets/css/pages/app.css">
+  <link rel="stylesheet" href="../assets/css/pages/exam.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app__main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page" id="main" tabindex="-1">
+        <div id="resume-slot"></div>
+
+        <section id="view-setup" aria-labelledby="setup-title">
+          <div class="page-header">
+            <div>
+              <h2 id="setup-title">Set up a practice exam</h2>
+              <p>Choose a subject, time limit and topics. Answer the questions in any order you like. Brainy Buddy records how you work, without judging the order.</p>
+            </div>
+          </div>
+
+          <div class="exam-setup">
+            <form class="panel" id="setup-form" novalidate>
+              <div class="form-block">
+                <div class="field">
+                  <label class="label" for="setup-subject">Subject</label>
+                  <select class="select" id="setup-subject" name="subject" required></select>
+                  <p class="hint" id="subject-hint"></p>
+                  <p class="field-error" id="setup-subject-error"></p>
+                </div>
+              </div>
+
+              <div class="form-block">
+                <fieldset>
+                  <legend class="label">Examination duration</legend>
+                  <div class="segmented" id="duration-options" role="radiogroup" aria-label="Examination duration"></div>
+                </fieldset>
+              </div>
+
+              <div class="form-block">
+                <fieldset>
+                  <legend class="label">Question categories</legend>
+                  <div class="chip-group" id="category-options"></div>
+                  <p class="field-error" id="categories-error"></p>
+                </fieldset>
+                <fieldset style="margin-top:20px">
+                  <legend class="label">Question types</legend>
+                  <div class="chip-group" id="type-options"></div>
+                  <p class="field-error" id="types-error"></p>
+                </fieldset>
+              </div>
+
+              <div class="form-block">
+                <div class="field" style="max-width:260px">
+                  <label class="label" for="setup-count">Number of questions</label>
+                  <select class="select" id="setup-count" name="count"></select>
+                </div>
+                <p class="available-note" id="available-note" aria-live="polite"></p>
+              </div>
+
+              <div class="form-block">
+                <button type="submit" class="btn btn--primary btn--lg" id="start-btn" data-icon="play">Start examination</button>
+              </div>
+            </form>
+
+            <aside class="stack">
+              <section class="panel" aria-labelledby="tracking-title">
+                <h3 class="panel__title" id="tracking-title">What Brainy Buddy records</h3>
+                <p class="panel__subtitle" style="margin-bottom:16px">Used only for your own analytics. Nothing leaves this browser in the demo.</p>
+                <ul class="tracking-list">
+                  <li><span data-icon="clock"></span>Active time on each question. The timer pauses when you switch question or leave the tab.</li>
+                  <li><span data-icon="shuffle"></span>The order you visit questions, and when you first see each one</li>
+                  <li><span data-icon="repeat"></span>Answers you select and every change you make</li>
+                  <li><span data-icon="skip"></span>Questions you skip or come back to</li>
+                  <li><span data-icon="flag"></span>Questions you flag for review</li>
+                </ul>
+              </section>
+              <section class="panel" aria-labelledby="recent-title">
+                <h3 class="panel__title" id="recent-title">Your recent simulator exams</h3>
+                <div id="recent-attempts" style="margin-top:12px"></div>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section id="view-exam" hidden aria-label="Examination in progress"></section>
+        <section id="view-results" hidden aria-labelledby="results-title"></section>
+        <div class="visually-hidden" id="exam-live" aria-live="polite"></div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/utils.js"></script>
+  <script src="../assets/js/core/storage.js"></script>
+  <script src="../assets/js/core/icons.js"></script>
+  <script src="../assets/js/core/mascot.js"></script>
+  <script src="../assets/js/core/theme.js"></script>
+  <script src="../assets/js/core/feedback.js"></script>
+  <script src="../assets/js/core/forms.js"></script>
+  <script src="../assets/js/core/auth.js"></script>
+  <script src="../assets/js/data/demo-data.js"></script>
+  <script src="../assets/js/data/question-bank.js"></script>
+  <script src="../assets/js/data/repo.js"></script>
+  <script src="../assets/js/core/ui.js"></script>
+  <script src="../assets/js/core/shell.js"></script>
+  <script src="../assets/vendor/chart.umd.min.js"></script>
+  <script src="../assets/js/core/charts.js"></script>
+  <script src="../assets/js/lib/exam-analytics.js"></script>
+  <script src="../assets/js/lib/arc-path.js"></script>
+  <script src="../assets/js/lib/exam-tracker.js"></script>
+  <script src="../assets/js/pages/exam.js"></script>
+</body>
+</html>

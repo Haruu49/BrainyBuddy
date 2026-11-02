@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings | Brainy Buddy</title>
+  <meta name="description" content="Manage your Brainy Buddy profile, education, subjects, notifications, theme and account.">
+  <meta name="theme-color" content="#ffa781">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <script src="../assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/viz.css">
+  <link rel="stylesheet" href="../assets/css/pages/app.css">
+  <link rel="stylesheet" href="../assets/css/pages/settings.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app__main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page" id="main" tabindex="-1">
+        <div class="page-header"><div><h2>Settings</h2><p>Manage your profile, subjects, notifications and how Brainy Buddy looks.</p></div></div>
+
+        <div class="settings">
+          <nav class="settings-nav" aria-label="Settings sections">
+            <ul>
+              <li><a href="#profile" data-icon="user">Student profile</a></li>
+              <li><a href="#education" data-icon="cap">Education</a></li>
+              <li><a href="#subjects" data-icon="book">Subjects</a></li>
+              <li><a href="#notifications" data-icon="bell">Notifications</a></li>
+              <li><a href="#appearance" data-icon="sun">Theme</a></li>
+              <li><a href="#account" data-icon="lock">Account</a></li>
+            </ul>
+          </nav>
+
+          <div>
+            <section class="panel settings-section" id="profile" aria-labelledby="profile-title">
+              <div class="panel__header"><div><h3 class="panel__title" id="profile-title">Student profile</h3><p class="panel__subtitle">Your name appears on your dashboard and reports.</p></div></div>
+              <form id="profile-form" novalidate>
+                <div class="profile-head"><span class="avatar avatar--lg" id="profile-avatar" aria-hidden="true"></span><div><strong id="profile-name-display"></strong><p class="text-sm text-secondary" id="profile-since"></p></div></div>
+                <div class="field-row">
+                  <div class="field"><label class="label" for="p-name">Full name</label><input class="input" id="p-name" name="name" autocomplete="name" maxlength="80" required><p class="field-error" id="p-name-error"></p></div>
+                  <div class="field"><label class="label" for="p-email">Email address</label><input class="input" id="p-email" name="email" type="email" autocomplete="email" required><p class="field-error" id="p-email-error"></p></div>
+                </div>
+                <div class="settings-actions"><button type="submit" class="btn btn--primary">Save profile</button></div>
+              </form>
+            </section>
+
+            <section class="panel settings-section" id="education" aria-labelledby="education-title">
+              <div class="panel__header"><div><h3 class="panel__title" id="education-title">Education information</h3><p class="panel__subtitle">Used to suggest subjects and pitch examples at the right level.</p></div></div>
+              <form id="education-form" novalidate>
+                <fieldset class="field" style="border:0;padding:0;margin:0"><legend class="label" style="margin-bottom:8px">Education level</legend><div class="option-grid" id="level-options" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))"></div><p class="field-error" id="level-error"></p></fieldset>
+                <div class="field-row" style="margin-top:20px">
+                  <div class="field"><label class="label" for="ed-institution">Institution name <span class="optional">(optional)</span></label><input class="input" id="ed-institution" name="institution" maxlength="120" autocomplete="organization"><p class="field-error" id="ed-institution-error"></p></div>
+                  <div class="field"><label class="label" for="ed-year">Year, form or grade <span class="optional">(optional)</span></label><input class="input" id="ed-year" name="yearOfStudy" maxlength="40" placeholder="For example, Form 5 or Year 2"><p class="field-error" id="ed-year-error"></p></div>
+                  <div class="field"><label class="label" for="ed-hours">Weekly study goal (hours)</label><input class="input" id="ed-hours" name="weeklyGoalHours" type="number" min="1" max="60" step="1" inputmode="numeric" required><p class="field-error" id="ed-hours-error"></p></div>
+                </div>
+                <div class="settings-actions"><button type="submit" class="btn btn--primary">Save education</button></div>
+              </form>
+            </section>
+
+            <section class="panel settings-section" id="subjects" aria-labelledby="subjects-title">
+              <div class="panel__header"><div><h3 class="panel__title" id="subjects-title">Subject management</h3><p class="panel__subtitle">Subjects appear in the simulator, study tracker, planner and reports. Removing a subject keeps its past results.</p></div></div>
+              <div class="chip-group" id="subject-chips" aria-live="polite"></div>
+              <form id="subject-form" class="field" style="margin-top:20px" novalidate>
+                <label class="label" for="new-subject">Add a subject</label>
+                <div class="subject-picker__add" style="display:flex;gap:8px;flex-wrap:wrap">
+                  <input class="input" id="new-subject" name="subject" list="subject-catalog" maxlength="40" autocomplete="off" style="flex:1;min-width:200px" placeholder="Start typing, for example Geography">
+                  <datalist id="subject-catalog"></datalist>
+                  <button type="submit" class="btn" data-icon="plus">Add subject</button>
+                </div>
+                <p class="field-error" id="new-subject-error"></p>
+              </form>
+            </section>
+
+            <section class="panel settings-section" id="notifications" aria-labelledby="notif-title">
+              <div class="panel__header"><div><div class="title-row"><h3 class="panel__title" id="notif-title">Notification preferences</h3><span class="badge badge--outline">Demo</span></div><p class="panel__subtitle">Saved now, delivered once notifications are connected to the backend.</p></div></div>
+              <form id="notif-form" novalidate>
+                <div class="switch-list">
+                  <label class="switch"><span class="switch__text"><strong>Study session reminders</strong><span>Before tasks in your study planner</span></span><input type="checkbox" name="studyReminders"></label>
+                  <label class="switch"><span class="switch__text"><strong>Examination reminders</strong><span>A few days before upcoming exams</span></span><input type="checkbox" name="examReminders"></label>
+                  <label class="switch"><span class="switch__text"><strong>New recommendations</strong><span>When your data produces a new suggestion</span></span><input type="checkbox" name="recommendations"></label>
+                  <label class="switch"><span class="switch__text"><strong>Weekly summary</strong><span>A short summary of your week, every Sunday</span></span><input type="checkbox" name="weeklySummary"></label>
+                  <label class="switch"><span class="switch__text"><strong>Email notifications</strong><span>Also send reminders by email</span></span><input type="checkbox" name="email"></label>
+                </div>
+                <div class="field" style="margin-top:24px;max-width:280px"><label class="label" for="lead">Remind me before a study task</label>
+                  <select class="select" id="lead" name="reminderLeadMinutes"><option value="5">5 minutes before</option><option value="15">15 minutes before</option><option value="30">30 minutes before</option><option value="60">1 hour before</option></select></div>
+                <div class="settings-actions"><button type="submit" class="btn btn--primary">Save notification preferences</button></div>
+              </form>
+            </section>
+
+            <section class="panel settings-section" id="appearance" aria-labelledby="theme-title">
+              <div class="panel__header"><div><h3 class="panel__title" id="theme-title">Theme settings</h3><p class="panel__subtitle">Changes apply straight away on this device.</p></div></div>
+              <fieldset style="border:0;padding:0;margin:0"><legend class="visually-hidden">Theme</legend>
+                <div class="option-grid theme-options">
+                  <label class="option-card"><input type="radio" name="theme" value="light"><span class="option-card__body"><span class="theme-swatch" aria-hidden="true"><i style="background:#fff6f2"></i><i style="background:#ffffff"></i><i style="background:#ffa781"></i></span><strong>Light</strong><span>Bright background</span></span></label>
+                  <label class="option-card"><input type="radio" name="theme" value="dark"><span class="option-card__body"><span class="theme-swatch" aria-hidden="true"><i style="background:#1c1412"></i><i style="background:#261b18"></i><i style="background:#ffa781"></i></span><strong>Dark</strong><span>Easier on the eyes at night</span></span></label>
+                  <label class="option-card"><input type="radio" name="theme" value="system"><span class="option-card__body"><span class="theme-swatch" aria-hidden="true"><i style="background:linear-gradient(135deg,#fff6f2 50%,#1c1412 50%)"></i></span><strong>Match my device</strong><span>Follows your system setting</span></span></label>
+                </div>
+              </fieldset>
+            </section>
+
+            <section class="panel settings-section danger-zone" id="account" aria-labelledby="account-title">
+              <div class="panel__header"><div><h3 class="panel__title" id="account-title">Account settings</h3><p class="panel__subtitle">Password, demo data and your account.</p></div></div>
+              <form id="password-form" novalidate>
+                <h4 class="label" style="margin-bottom:12px">Change password</h4>
+                <div class="field-row">
+                  <div class="field"><label class="label" for="currentPassword">Current password</label><input class="input" type="password" id="currentPassword" name="currentPassword" autocomplete="current-password" required><p class="field-error" id="currentPassword-error"></p></div>
+                  <div class="field"><label class="label" for="newPassword">New password</label><input class="input" type="password" id="newPassword" name="newPassword" autocomplete="new-password" required aria-describedby="np-hint"><p class="hint" id="np-hint">At least 8 characters, with a letter and a number.</p><p class="field-error" id="newPassword-error"></p></div>
+                  <div class="field"><label class="label" for="confirmNew">Confirm new password</label><input class="input" type="password" id="confirmNew" name="confirmNew" autocomplete="new-password" required><p class="field-error" id="confirmNew-error"></p></div>
+                </div>
+                <div class="settings-actions" style="border-top:0;padding-top:0;margin-top:16px"><button type="submit" class="btn" id="pw-submit">Update password</button></div>
+              </form>
+              <hr>
+              <div class="account-row"><div><strong>Show demo data</strong><p>Include the sample exams, study sessions and planner tasks. Turn this off to see only what you've recorded yourself.</p></div><label class="switch"><span class="visually-hidden">Show demo data</span><input type="checkbox" id="demo-toggle"></label></div>
+              <div class="account-row"><div><strong>Export your data</strong><p>Download everything you've recorded as a JSON file.</p></div><button type="button" class="btn" id="export-btn" data-icon="download">Export data</button></div>
+              <div class="account-row"><div><strong>Redo onboarding</strong><p>Go through the welcome steps again to update your level, subjects and goals.</p></div><a class="btn" href="../onboarding.html?redo=1">Redo onboarding</a></div>
+              <div class="account-row"><div><strong>Design system</strong><p>See the Brainy Buddy colours, type and components.</p></div><a class="btn btn--ghost" href="styleguide.html">Open design system</a></div>
+              <div class="account-row"><div><strong>Reset my data</strong><p>Delete your exams, study sessions, planner tasks, imported records and recommendation progress. Your profile stays.</p></div><button type="button" class="btn btn--danger-outline" id="reset-btn">Reset data</button></div>
+              <div class="account-row"><div><strong>Sign out</strong><p>You can sign back in with your email and password.</p></div><button type="button" class="btn" data-sign-out data-icon="logout">Sign out</button></div>
+              <div class="account-row"><div><strong>Delete account</strong><p>Permanently delete your demo account and all of its data from this browser.</p></div><button type="button" class="btn btn--danger" id="delete-btn">Delete account</button></div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/utils.js"></script>
+  <script src="../assets/js/core/storage.js"></script>
+  <script src="../assets/js/core/icons.js"></script>
+  <script src="../assets/js/core/mascot.js"></script>
+  <script src="../assets/js/core/theme.js"></script>
+  <script src="../assets/js/core/feedback.js"></script>
+  <script src="../assets/js/core/forms.js"></script>
+  <script src="../assets/js/core/auth.js"></script>
+  <script src="../assets/js/data/demo-data.js"></script>
+  <script src="../assets/js/data/question-bank.js"></script>
+  <script src="../assets/js/data/repo.js"></script>
+  <script src="../assets/js/core/ui.js"></script>
+  <script src="../assets/js/core/shell.js"></script>
+  <script src="../assets/js/pages/settings.js"></script>
+</body>
+</html>

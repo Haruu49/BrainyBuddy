@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Study Planner | Brainy Buddy</title>
+  <meta name="description" content="Plan study sessions around upcoming examinations, with recommended sessions based on your own results.">
+  <meta name="theme-color" content="#ffa781">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <script src="../assets/js/core/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Inter:wght@400..800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/viz.css">
+  <link rel="stylesheet" href="../assets/css/pages/app.css">
+  <link rel="stylesheet" href="../assets/css/pages/planner.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app__main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page" id="main" tabindex="-1">
+        <div class="page-header">
+          <div>
+            <div class="title-row"><h2>Study planner</h2><span id="demo-flag"></span></div>
+            <p>Plan sessions around your upcoming exams. Tick them off as you go.</p>
+          </div>
+          <button type="button" class="btn btn--primary" id="add-task" data-icon="plus">Add study task</button>
+        </div>
+
+        <section class="panel" aria-labelledby="week-title">
+          <div class="split">
+            <h2 class="panel__title" id="week-title">Weekly calendar</h2>
+            <div class="week-nav">
+              <button type="button" class="btn btn--icon btn--sm" id="week-prev" aria-label="Previous week" data-icon="chevron-left"></button>
+              <span class="week-nav__label" id="week-label" aria-live="polite"></span>
+              <button type="button" class="btn btn--icon btn--sm" id="week-next" aria-label="Next week" data-icon="chevron-right"></button>
+              <button type="button" class="btn btn--sm" id="week-today">This week</button>
+            </div>
+          </div>
+          <div class="week" id="week"></div>
+        </section>
+
+        <div class="grid grid--main-side section">
+          <div class="stack" style="--stack-gap:20px">
+            <section class="panel" aria-labelledby="day-title">
+              <div class="panel__header">
+                <div><h2 class="panel__title" id="day-title">Daily schedule</h2><p class="panel__subtitle" id="day-sub"></p></div>
+                <button type="button" class="btn btn--sm" id="add-task-day" data-icon="plus">Add to this day</button>
+              </div>
+              <div id="day-list"></div>
+            </section>
+          </div>
+
+          <div class="stack" style="--stack-gap:20px">
+            <section class="panel" aria-labelledby="exams-title">
+              <div class="panel__header" style="margin-bottom:16px">
+                <h2 class="panel__title" id="exams-title">Upcoming examinations</h2>
+                <button type="button" class="btn btn--sm btn--soft" id="add-exam" data-icon="plus">Add</button>
+              </div>
+              <div id="exam-list"></div>
+            </section>
+
+            <section class="panel" aria-labelledby="rec-sessions-title">
+              <div class="panel__header" style="margin-bottom:16px">
+                <div><h2 class="panel__title" id="rec-sessions-title">Recommended study sessions</h2><p class="panel__subtitle">Based on your exams, results and recommendations</p></div>
+              </div>
+              <div id="suggestions"></div>
+            </section>
+
+            <section class="panel" aria-labelledby="rem-title">
+              <div class="panel__header" style="margin-bottom:16px">
+                <div><div class="title-row"><h2 class="panel__title" id="rem-title">Study reminders</h2><span class="badge badge--outline">Demo only</span></div>
+                <p class="panel__subtitle">Real notifications need the backend and your browser's permission.</p></div>
+              </div>
+              <div id="reminders"></div>
+            </section>
+          </div>
+        </div>
+
+        <dialog class="dialog" id="task-dialog" aria-labelledby="task-dialog-title">
+          <form id="task-form" novalidate>
+            <div class="dialog__header">
+              <h2 class="dialog__title" id="task-dialog-title">Add study task</h2>
+              <button type="button" class="btn btn--ghost btn--icon btn--sm" data-dialog-close aria-label="Close dialog" data-icon="x"></button>
+            </div>
+            <div class="dialog__body" style="color:var(--color-text)">
+              <input type="hidden" name="id">
+              <div class="field"><label class="label" for="t-title">Task</label><input class="input" id="t-title" name="title" maxlength="80" required placeholder="For example, Timed past-paper questions"><p class="field-error" id="t-title-error"></p></div>
+              <div class="field"><label class="label" for="t-subject">Subject</label><select class="select" id="t-subject" name="subject"></select></div>
+              <div class="field"><label class="label" for="t-date">Date</label><input class="input" type="date" id="t-date" name="date" required><p class="field-error" id="t-date-error"></p></div>
+              <div class="field-row">
+                <div class="field"><label class="label" for="t-start">Start time</label><input class="input" type="time" id="t-start" name="start" required step="300"><p class="field-error" id="t-start-error"></p></div>
+                <div class="field"><label class="label" for="t-end">End time</label><input class="input" type="time" id="t-end" name="end" required step="300"><p class="field-error" id="t-end-error"></p></div>
+                <div class="field"><label class="label" for="t-duration">Duration (min)</label><input class="input" type="number" id="t-duration" name="duration" min="5" max="480" step="5" inputmode="numeric" aria-describedby="t-duration-hint"><p class="hint" id="t-duration-hint">Changing this moves the end time.</p><p class="field-error" id="t-duration-error"></p></div>
+              </div>
+              <div class="field"><label class="label" for="t-notes">Notes <span class="optional">(optional)</span></label><textarea class="textarea" id="t-notes" name="notes" maxlength="300" style="min-height:80px"></textarea></div>
+              <div class="field"><label class="check"><input type="checkbox" name="reminder" id="t-reminder"><span>Remind me before it starts (demo)</span></label></div>
+              <div class="field"><label class="check"><input type="checkbox" name="completed" id="t-completed"><span>Mark as completed</span></label></div>
+            </div>
+            <div class="dialog__footer">
+              <button type="button" class="btn btn--danger-outline" id="t-delete" hidden>Delete task</button>
+              <button type="button" class="btn" data-dialog-close>Cancel</button>
+              <button type="submit" class="btn btn--primary" id="t-save">Save task</button>
+            </div>
+          </form>
+        </dialog>
+
+        <dialog class="dialog" id="exam-dialog" aria-labelledby="exam-dialog-title">
+          <form id="exam-form" novalidate>
+            <div class="dialog__header">
+              <h2 class="dialog__title" id="exam-dialog-title">Add an upcoming examination</h2>
+              <button type="button" class="btn btn--ghost btn--icon btn--sm" data-dialog-close aria-label="Close dialog" data-icon="x"></button>
+            </div>
+            <div class="dialog__body" style="color:var(--color-text)">
+              <div class="field"><label class="label" for="e-subject">Subject</label><select class="select" id="e-subject" name="subject"></select></div>
+              <div class="field"><label class="label" for="e-title">Examination name</label><input class="input" id="e-title" name="title" maxlength="80" required placeholder="For example, Final examination"><p class="field-error" id="e-title-error"></p></div>
+              <div class="field-row">
+                <div class="field"><label class="label" for="e-date">Date</label><input class="input" type="date" id="e-date" name="date" required><p class="field-error" id="e-date-error"></p></div>
+                <div class="field"><label class="label" for="e-time">Start time</label><input class="input" type="time" id="e-time" name="time" required><p class="field-error" id="e-time-error"></p></div>
+              </div>
+            </div>
+            <div class="dialog__footer">
+              <button type="button" class="btn" data-dialog-close>Cancel</button>
+              <button type="submit" class="btn btn--primary">Add examination</button>
+            </div>
+          </form>
+        </dialog>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/utils.js"></script>
+  <script src="../assets/js/core/storage.js"></script>
+  <script src="../assets/js/core/icons.js"></script>
+  <script src="../assets/js/core/mascot.js"></script>
+  <script src="../assets/js/core/theme.js"></script>
+  <script src="../assets/js/core/feedback.js"></script>
+  <script src="../assets/js/core/forms.js"></script>
+  <script src="../assets/js/core/auth.js"></script>
+  <script src="../assets/js/data/demo-data.js"></script>
+  <script src="../assets/js/data/question-bank.js"></script>
+  <script src="../assets/js/data/repo.js"></script>
+  <script src="../assets/js/core/ui.js"></script>
+  <script src="../assets/js/core/shell.js"></script>
+  <script src="../assets/js/lib/exam-analytics.js"></script>
+  <script src="../assets/js/lib/study-analytics.js"></script>
+  <script src="../assets/js/lib/academic.js"></script>
+  <script src="../assets/js/lib/recommendation-engine.js"></script>
+  <script src="../assets/js/pages/planner.js"></script>
+</body>
+</html>
